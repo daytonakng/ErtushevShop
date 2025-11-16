@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\img\actionlens-logo.png" />
+    <Content Remove="wwwroot\img\background.jpg" />
+    <Content Remove="wwwroot\img\gopro.jpg" />
+    <Content Remove="wwwroot\img\i.webp" />
+    <Content Remove="wwwroot\img\logo.png" />
+    <Content Remove="wwwroot\img\logo1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Home\items\autel-evolite.jpg" />
+    <None Remove="Views\Home\items\canon-eos2000d.jpg" />
+    <None Remove="Views\Home\items\nikon-d7500.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Controllers\img\autel-evolite.jpg" />
+    <Resource Include="Controllers\img\canon-eos2000d.jpg" />
+    <Resource Include="Controllers\img\nikon-d7500.jpg" />
+    <Resource Include="wwwroot\img\actionlens-logo.png" />
+    <Resource Include="wwwroot\img\background.jpg" />
+    <Resource Include="wwwroot\img\gopro.jpg" />
+    <Resource Include="wwwroot\img\i.webp" />
+    <Resource Include="wwwroot\img\logo.png" />
+    <Resource Include="wwwroot\img\logo1.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Home\items\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.2" />
+    <PackageReference Include="Npgsql" Version="9.0.4" />
+  </ItemGroup>
+
+</Project>
