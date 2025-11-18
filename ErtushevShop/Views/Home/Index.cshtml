@@ -62,9 +62,7 @@
 
         @if (!Model.Any())
         {
-            <div class="alert alert-info">
-                Товары не найдены.
-            </div>
+            <h3 class="mb-4">Товары не найдены</h3>
         }
         else
         {
@@ -88,32 +86,32 @@
                                 <p class="card-text text-secondary fst-italic">
                                     @product.Category
                                 </p>
-@*                                 @if (!string.IsNullOrEmpty(product.Description))
+                                @if (!string.IsNullOrEmpty(product.Description))
                                 {
-                                    <p class="card-text">@product.Description</p>
-                                } *@
+                                    <p id="paragraph" class="card-text">@product.Description</p>
+                                }
                                 <div class="d-flex justify-content-between mt-auto">
                                     <span class="h5 text-primary">
                                         @string.Format("{0:C}", product.Price)
                                     </span>
                                     <div class="d-flex gap-2">
-                                        <button type="button"
+                                        <form asp-action="AddToCart" method="post">
+                                            <input type="hidden" name="id" value="@product.Id" />
+                                            <button type="submit"
                                                 class="btn btn-sm btn-outline-secondary"
-                                                title="Добавить в корзину"
-                                                data-product-id="@product.Id"
-                                                data-action="cart"
-                                                onclick="toggleCart(this)">
-                                            <i class="bi bi-basket"></i>
-                                        </button>
+                                                title="В корзину">
+                                                <i class="bi bi-basket"></i>
+                                            </button>
+                                        </form>
 
-                                        <button type="button"
-                                                class="btn btn-sm btn-outline-danger"
-                                                title="Добавить в избранное"
-                                                data-product-id="@product.Id"
-                                                data-action="favorite"
-                                                onclick="toggleFavorite(this)">
-                                            <i class="bi bi-heart"></i>
-                                        </button>
+                                        <form asp-action="AddToFavorite" method="post">
+                                            <input type="hidden" name="id" value="@product.Id" />
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-outline-danger"
+                                                    title="В избранное">
+                                                <i class="bi bi-heart"></i>
+                                            </button>
+                                        </form>
 
                                         <a href="/Home/Details/@product.Id"
                                            class="btn btn-sm btn-outline-primary">

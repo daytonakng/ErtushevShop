@@ -1,8 +1,11 @@
-using System.Data;
-using System.Diagnostics;
-using ErtushevShop.Models;
+﻿using ErtushevShop.Models;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Data;
+using System.Diagnostics;
+using System.Text.Json;
 
 namespace ErtushevShop.Controllers
 {
@@ -12,18 +15,21 @@ namespace ErtushevShop.Controllers
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, CartService cartService)
         {
             _logger = logger;
+            _cartService = cartService;
         }
 
-        public IActionResult Index(string searchTerm = null, string selectedCategory = null, string sortBy = null)
+        private readonly CartService _cartService;
+
+        private List<Product> GetProductsFromDB()
         {
             DataTable dtGetData = new DataTable();
 
             dtGetData = database.GetData("SELECT id, brand, model, category, descript, price FROM cameras UNION ALL SELECT id, brand, model, category, descript, price FROM actioncameras UNION ALL SELECT id, brand, model, category, descript, price FROM copters;");
 
-            List<Product> products = new List<Product>();
+            List<Product> productList = new List<Product>();
 
             foreach (DataRow row in dtGetData.Rows)
             {
@@ -36,8 +42,15 @@ namespace ErtushevShop.Controllers
                         image: $"/img/{row[0]}.jpg",
                         price: Convert.ToInt32(row[5])
                     );
-                products.Add(product);
+                productList.Add(product);
             }
+
+            return productList;
+        }
+
+        public IActionResult Index(string searchTerm = null, string selectedCategory = null, string sortBy = null)
+        {
+            List<Product> products = GetProductsFromDB();
 
             ViewBag.Categories = products
                 .Select(p => p.Category)
@@ -74,10 +87,6 @@ namespace ErtushevShop.Controllers
             };
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
         public IActionResult Details(int id)
         {
             if (id / 100000 == 4)
@@ -162,12 +171,46 @@ namespace ErtushevShop.Controllers
 
         public IActionResult Cart()
         {
-            return View();
+            List<Product> productList = GetProductsFromDB();
+
+            var cartItems = _cartService.GetCart();
+
+            // Получаем полные данные товаров
+            var products = GetProductsFromDB();
+            foreach (var item in cartItems)
+            {
+                item.Product = products.FirstOrDefault(p => p.Id == item.ProductId);
+            }
+
+            return View(cartItems);
+        }
+
+        [HttpPost]
+        public IActionResult AddToCart(int id)
+        {
+            _cartService.AddToCart(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult RemoveFromCart(int id)
+        {
+            _cartService.RemoveFromCart(id);
+            return RedirectToAction("Cart");
+        }
+
+        [HttpPost]
+        public IActionResult UpdateQuantity(int id, int quantity)
+        {
+            _cartService.UpdateQuantity(id, quantity);
+            return RedirectToAction("Cart");
         }
 
         public IActionResult Favorite()
         {
-            return View();
+            var viewModel = new Dictionary<int, (Product product, int count)>();
+
+            return View(viewModel);
         }
 
         public IActionResult Profile()
@@ -179,11 +222,6 @@ namespace ErtushevShop.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public IActionResult Test()
-        {
-            return Content("<h1>Ertushev</h1>", "text/html");
         }
     }
 }

@@ -79,3 +79,4 @@ C:\Users\user\source\repos\ErtushevShop\ErtushevShop\bin\Debug\net8.0\runtimes\w
 C:\Users\user\source\repos\ErtushevShop\ErtushevShop\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\user\source\repos\ErtushevShop\ErtushevShop\obj\Debug\net8.0\ErtushevShop.csproj.AssemblyReference.cache
 C:\Users\user\source\repos\ErtushevShop\ErtushevShop\obj\Debug\net8.0\Ertushev.2F1C7A3A.Up2Date
+C:\Users\user\source\repos\ErtushevShop\ErtushevShop\obj\Debug\net8.0\ErtushevShop.sourcelink.json

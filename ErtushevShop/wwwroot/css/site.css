@@ -2,6 +2,31 @@ html {
   font-size: 14px;
 }
 
+/*#order-block {
+    display: none;
+}*/
+
+td a {
+    text-decoration: none;
+    color: black;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.block-table span {
+    color: #0d6efd;
+}
+.del-product {
+    text-align: right;
+}
+
+.block-table {
+    padding: 1%;
+    background-color: white;
+    border-radius: 0.5rem;
+}
 
 .header {
     z-index: 1000; /* Чтобы шапка была сверху всех элементов */
@@ -11,6 +36,17 @@ html {
 .logo a {
     display: flex;
     align-items: baseline;
+}
+
+#paragraph {
+    text-align: left;
+    line-height: 1.5;
+    max-height: 3em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
 }
 
 /* Отступы для иконок */
@@ -45,7 +81,7 @@ html {
     transform: scale(0.8);
 }
 
-.form-label {
+.col-md-3 label {
     color: white;
 }
 
@@ -77,18 +113,197 @@ body {
     padding: 2%;
 }
 
+.text-center.py-5 {
+    border: 1px solid #e9ecef;
+    background-color: white;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+h1.mb-4, h3.mb-4 {
+    color: white;
+}
+
 button:focus,
 button:active,
 select:focus,
-select:active{
+select:active {
     outline: none !important;
     box-shadow: none !important;
 }
 
-.navbar {
-    background: -webkit-linear-gradient(225deg, rgb(46, 48, 49), rgb(44, 46, 46) 100%);
-    background: -moz-linear-gradient(225deg, rgb(46, 48, 49), rgb(44, 46, 46) 100%);
-    background: linear-gradient(225deg, rgb(46, 48, 49), rgb(44, 46, 46) 100%);
+/* Общий контейнер корзины */
+.cart-items {
+    margin-bottom: 2rem;
+}
+
+    /* Карточка товара в корзине */
+    .cart-items .card {
+        border: 1px solid #e9ecef;
+        border-radius: 0.5rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .cart-items .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+    /* Блок с изображением товара */
+    .cart-items .me-3 {
+        flex-shrink: 0;
+    }
+
+    /* Информация о товаре */
+    .cart-items h5 {
+        margin-bottom: 0.25rem;
+        font-size: 1rem;
+    }
+
+    .cart-items p {
+        margin-bottom: 0;
+        font-size: 0.9rem;
+    }
+
+/* Блок количества */
+.quantity-input {
+    text-align: center;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0;
+    border-top: 1px solid #ced4da;
+    border-bottom: 1px solid #ced4da;
+}
+
+.minus-btn,
+.plus-btn {
+    padding: 0.375rem 0.75rem;
+    border-radius: 0;
+}
+
+/* Кнопка удаления */
+.btn-link.text-danger {
+    color: #dc3545;
+    text-decoration: none;
+    padding: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+    .btn-link.text-danger:hover {
+        color: #c82333;
+        text-decoration: underline;
+    }
+
+/* Итоговый блок */
+.card.mt-4 {
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+}
+
+    .card.mt-4 .card-body {
+        padding: 1.5rem;
+    }
+
+#total-price {
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+/* Форма оформления заказа */
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem 1.5rem;
+}
+
+.form-label {
+    font-weight: 500;
+    color: #495057;
+}
+
+.form-control {
+    border-radius: 0.375rem;
+    padding: 0.625rem 1rem;
+    border: 1px solid #ced4da;
+}
+
+    .form-control:focus {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Кнопка оформления заказа */
+.btn.btn-success.w-100 {
+    background-color: #198754;
+    border-color: #198754;
+    font-weight: 500;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+    .btn.btn-success.w-100:hover {
+        background-color: #157347;
+        border-color: #157347;
+    }
+
+/* Модальное окно */
+.modal-content {
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+}
+
+.modal-header {
+    border-bottom: none;
+    padding: 1.5rem 2rem;
+}
+
+.modal-title {
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 1.5rem 2rem;
+    color: #6c757d;
+}
+
+.modal-footer {
+    border-top: none;
+    padding: 1rem 2rem 1.5rem;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .card {
+        margin-bottom: 1.5rem;
+    }
+
+    .quantity-input,
+    .minus-btn,
+    .plus-btn {
+        font-size: 0.875rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+    }
+
+    .col-lg-8,
+    .col-lg-4 {
+        width: 100%;
+    }
+
+    h1.mb-4 {
+        font-size: 1.5rem;
+    }
 }
 
 @media (min-width: 768px) {

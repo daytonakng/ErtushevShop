@@ -15,38 +15,30 @@
 <header class="header fixed-top bg-white shadow-sm">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center py-2">
-            <!-- Логотип (слева) -->
             <div class="logo">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                     <img class="header-logo" src="/img/actionlens-logo.png" />
                 </a>
             </div>
 
-            <!-- Правая часть: профиль, корзина, избранное -->
             <div class="header-actions d-flex align-items-center gap-3">
-                <!-- Корзина -->
                 <div class="position-relative">
-                        <a href="/Home/Cart" class="text-dark text-decoration-none position-relative" title="Корзина">
+                    <a href="/Home/Cart" class="text-dark text-decoration-none position-relative" title="Корзина">
                         <i class="bi bi-basket fs-4"></i>
-                        <!-- Количество товаров в корзине (пример) -->
-                            <span class="badge bg-primary rounded-pill position-absolute top-0 start-100 translate-middle" data-type="cart"></span>
                     </a>
                 </div>
 
-                <!-- Избранное -->
+
                 <div class="position-relative">
-                        <a href="/Home/Favorite" class="text-dark text-decoration-none position-relative" title="Избранное">
+                     <a href="/Home/Favorite" class="text-dark text-decoration-none position-relative" title="Избранное">
                         <i class="bi bi-heart fs-4"></i>
-                        <!-- Количество товаров в избранном (пример) -->
-                            <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" data-type="favorite"></span>
                     </a>
                 </div>
-                <!-- Профиль пользователя -->
+
                 <div class="position-relative">
                     <a href="/Home/Profile" class="text-dark text-decoration-none" title="Мой профиль">
                         <i class="bi bi-person-circle fs-4"></i>
                     </a>
-                    <!-- Если пользователь авторизован, можно добавить выпадающее меню -->
                 </div>
             </div>
         </div>
@@ -60,7 +52,7 @@
 
     <footer class="border-top bg-white footer text-muted">
         <div class="container">
-            &copy; 2025 - ActionLens - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2025 - ActionLens
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
