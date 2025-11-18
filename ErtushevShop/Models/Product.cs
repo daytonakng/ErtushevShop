@@ -23,7 +23,7 @@
 
         public override string ToString()
         {
-            return $"Идентификатор:{Id} Бренд:{Brand} Модель:{Model} Описание:{Description} Категория:{Category} Картинка:{Image} Цена:{Price}";
+            return $"{Brand} {Model}";
         }
     }
 }

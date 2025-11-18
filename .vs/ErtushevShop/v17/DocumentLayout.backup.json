@@ -11,24 +11,36 @@
       "RelativeMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|solutionrelative:ertushevshop\\models\\cartservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|c:\\users\\user\\source\\repos\\ertushevshop\\ertushevshop\\views\\home\\cart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|solutionrelative:ertushevshop\\views\\home\\cart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|c:\\users\\user\\source\\repos\\ertushevshop\\ertushevshop\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|solutionrelative:ertushevshop\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|c:\\users\\user\\source\\repos\\ertushevshop\\ertushevshop\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|solutionrelative:ertushevshop\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|c:\\users\\user\\source\\repos\\ertushevshop\\ertushevshop\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
       "RelativeMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|solutionrelative:ertushevshop\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|c:\\users\\user\\source\\repos\\ertushevshop\\ertushevshop\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|solutionrelative:ertushevshop\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|c:\\users\\user\\source\\repos\\ertushevshop\\ertushevshop\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|solutionrelative:ertushevshop\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|c:\\users\\user\\source\\repos\\ertushevshop\\ertushevshop\\views\\home\\cart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|solutionrelative:ertushevshop\\views\\home\\cart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|c:\\users\\user\\source\\repos\\ertushevshop\\ertushevshop\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|solutionrelative:ertushevshop\\wwwroot\\js\\site.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|c:\\users\\user\\source\\repos\\ertushevshop\\ertushevshop\\views\\home\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|solutionrelative:ertushevshop\\views\\home\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|c:\\users\\user\\source\\repos\\ertushevshop\\ertushevshop\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|solutionrelative:ertushevshop\\models\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|c:\\users\\user\\source\\repos\\ertushevshop\\ertushevshop\\views\\home\\favorite.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4306FF66-FB10-4AFE-BA39-C03D11C913A9}|ErtushevShop\\ErtushevShop.csproj|solutionrelative:ertushevshop\\views\\home\\favorite.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -37,51 +49,90 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "DockedWidth": 229,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
+              "Title": "Favorite.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Views\\Home\\Favorite.cshtml",
+              "RelativeDocumentMoniker": "ErtushevShop\\Views\\Home\\Favorite.cshtml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Views\\Home\\Favorite.cshtml",
+              "RelativeToolTip": "ErtushevShop\\Views\\Home\\Favorite.cshtml",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-18T17:54:05.52Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Product.cs",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Models\\Product.cs",
+              "RelativeDocumentMoniker": "ErtushevShop\\Models\\Product.cs",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Models\\Product.cs",
+              "RelativeToolTip": "ErtushevShop\\Models\\Product.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABkAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-18T17:10:36.736Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Views\\Home\\Details.cshtml",
+              "RelativeDocumentMoniker": "ErtushevShop\\Views\\Home\\Details.cshtml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Views\\Home\\Details.cshtml",
+              "RelativeToolTip": "ErtushevShop\\Views\\Home\\Details.cshtml",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAADAAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-18T15:45:06.895Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "site.js",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\wwwroot\\js\\site.js",
               "RelativeDocumentMoniker": "ErtushevShop\\wwwroot\\js\\site.js",
               "ToolTip": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\wwwroot\\js\\site.js",
               "RelativeToolTip": "ErtushevShop\\wwwroot\\js\\site.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAABMAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACUAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2025-11-18T13:19:55.713Z",
+              "WhenOpened": "2025-11-18T16:37:35.05Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "ErtushevShop\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "ErtushevShop\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGQAAABYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-10-22T07:05:58.401Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Cart.cshtml",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Views\\Home\\Cart.cshtml",
               "RelativeDocumentMoniker": "ErtushevShop\\Views\\Home\\Cart.cshtml",
               "ToolTip": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Views\\Home\\Cart.cshtml",
               "RelativeToolTip": "ErtushevShop\\Views\\Home\\Cart.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEcAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-16T13:36:09.066Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "ErtushevShop\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "ErtushevShop\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAAAAYAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-10-22T07:05:58.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "ErtushevShop\\Views\\Shared\\_Layout.cshtml",
@@ -89,17 +140,18 @@
               "RelativeToolTip": "ErtushevShop\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-14T18:16:47.773Z"
+              "WhenOpened": "2025-11-14T18:16:47.773Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "site.css",
               "DocumentMoniker": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\wwwroot\\css\\site.css",
               "RelativeDocumentMoniker": "ErtushevShop\\wwwroot\\css\\site.css",
               "ToolTip": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\wwwroot\\css\\site.css",
               "RelativeToolTip": "ErtushevShop\\wwwroot\\css\\site.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAPkAAAAAAAAAAAAAAPYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-11-14T19:16:45.066Z",
               "EditorCaption": ""
@@ -112,7 +164,7 @@
               "RelativeDocumentMoniker": "ErtushevShop\\Models\\CartService.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Models\\CartService.cs",
               "RelativeToolTip": "ErtushevShop\\Models\\CartService.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABsAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-17T14:34:56.003Z",
               "EditorCaption": ""
@@ -125,7 +177,7 @@
               "RelativeDocumentMoniker": "ErtushevShop\\Controllers\\HomeController.cs",
               "ToolTip": "C:\\Users\\user\\source\\repos\\ErtushevShop\\ErtushevShop\\Controllers\\HomeController.cs",
               "RelativeToolTip": "ErtushevShop\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACMAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAMsAAAAAAAAAAAAAALAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-22T06:54:39.205Z",
               "EditorCaption": ""

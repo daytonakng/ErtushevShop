@@ -19,3 +19,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
         document.getElementById("order-block").style.display = 'none';
     }
 });
+
+function addToCart() {
+    document.getElementById('addToCartForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const data = new FormData(form);
+
+        fetch('/Home/AddToCart', {
+            method: 'POST',
+            body: data
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log(`Товар добавлен в корзину!`);
+                }
+            });
+    });
+}

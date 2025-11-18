@@ -175,7 +175,6 @@ namespace ErtushevShop.Controllers
 
             var cartItems = _cartService.GetCart();
 
-            // Получаем полные данные товаров
             var products = GetProductsFromDB();
             foreach (var item in cartItems)
             {
@@ -187,6 +186,13 @@ namespace ErtushevShop.Controllers
 
         [HttpPost]
         public IActionResult AddToCart(int id)
+        {
+            _cartService.AddToCart(id);
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult AddToCartFromIndex(int id)
         {
             _cartService.AddToCart(id);
             return RedirectToAction("Index");

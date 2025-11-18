@@ -23,7 +23,6 @@
             </div>
         </div>
 
-        <!-- Правая колонка: информация о товаре -->
         <div class="col-md-6">
             <h1 class="mb-3">@Model.Brand @Model.Model</h1>
             
@@ -42,15 +41,15 @@
                 </div>
             }
 
-            <!-- Кнопки действий -->
             <div class="d-flex gap-2 mb-4">
-                <button type="button" 
-                    class="btn btn-lg btn-outline-secondary"
-                    data-product-id="@Model.Id"
-                    data-action="cart"
-                    onclick="toggleCart(this)">
-                    <i class="bi bi-basket"></i> В корзину
-                </button>
+                <form id="addToCartForm" asp-action="AddToCart" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <button type="submit"
+                        class="btn btn-lg btn-outline-success"
+                        onclick="addToCart()">
+                        <i class="bi bi-basket"></i> В корзину
+                    </button>
+                </form>
                 <button type="button" 
                     class="btn btn-lg btn-outline-danger"
                     data-product-id="@Model.Id"
@@ -60,19 +59,16 @@
                 </button>
             </div>
 
-            <!-- Ссылка назад -->
             <a href="/" class="text-decoration-none">← Вернуться к каталогу</a>
         </div>
     </div>
 
 
-    <!-- Блок характеристик -->
     <div class="item row mt-5">
         <div class="col">
             <h3>Характеристики</h3>
             <table class="table table-borderless table-hover">
                 <tbody>
-                    <!-- Базовые характеристики -->
                     <tr>
                         <th style="width: 20%;">Артикул</th>
                         <td>@Model.Id</td>
@@ -90,7 +86,6 @@
                         <td>@Model.Category</td>
                     </tr>
 
-                    <!-- Специфические характеристики в зависимости от типа -->
                     @if (Model is Cameras camera)
                     {
                         <tr><th>Размер сенсора</th><td>@camera.SensorSize</td></tr>
@@ -120,136 +115,4 @@
         </div>
     </div>
 </div>
-
-<!-- Подключение Bootstrap Icons -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-
-
-<!-- JavaScript для кнопок (как в предыдущих примерах) -->
-<script>
-    function addToCart(productId, brand, model) {
-        console.log(`Товар ${productId} (${brand} ${model}) добавлен в корзину`);
-        // Здесь ваш код отправки в корзину
-    }
-
-    function addToFavorites(productId) {
-        console.log(`Товар ${productId} добавлен в избранное`);
-        // Здесь ваш код добавления в избранное
-    }
-</script>
-@* <div class="text-center">
-    <h1>@Model.Brand @Model.Model</h1>
-    <p><strong>Категория:</strong> @Model.Category</p>
-    <p><strong>Цена:</strong> @Model.Price.ToString("C")</p>
-    <p>@Model.Description</p>
-
-    <hr />
-
-    <!-- Общие поля -->
-    <div class="field">
-        <strong>ID:</strong> @Model.Id
-    </div>
-
-    <!-- Условный вывод специфических полей -->
-    @if (Model is Cameras camera)
-    {
-        <div class="field">
-            <strong>Размер сенсора:</strong> @camera.SensorSize
-        </div>
-        <div class="field">
-            <strong>Выдержка:</strong> @camera.ShutterSpeed
-        </div>
-        <div class="field">
-            <strong>Диафрагма:</strong> @camera.Aperture
-        </div>
-        <div class="field">
-            <strong>Диапазон ISO:</strong> @camera.IsoRange
-        </div>
-        <div class="field">
-            <strong>Разрешение фото:</strong> @camera.PhotoRes
-        </div>
-    }
-    else if (Model is ActionCameras actionCam)
-    {
-        <div class="field">
-            <strong>Угол обзора:</strong> @actionCam.ViewAngle
-        </div>
-        <div class="field">
-            <strong>Водонепроницаемость:</strong> @actionCam.Depth
-        </div>
-        <div class="field">
-            <strong>Крепление:</strong> @actionCam.Fixation
-        </div>
-        <div class="field">
-            <strong>Управление через приложение:</strong> @actionCam.AppManage
-        </div>
-        <div class="field">
-            <strong>Диапазон ISO:</strong> @actionCam.IsoRange
-        </div>
-    }
-    else if (Model is Copters copter)
-    {
-        <div class="field">
-            <strong>Максимальная скорость:</strong> @copter.Speed
-        </div>
-        <div class="field">
-            <strong>Максимальная высота:</strong> @copter.Height
-        </div>
-        <div class="field">
-            <strong>Время полёта:</strong> @copter.Duration
-        </div>
-        <div class="field">
-            <strong>Управление через приложение:</strong> @copter.AppManage
-        </div>
-        <div class="field">
-            <strong>Разрешение фото:</strong> @copter.PhotoRes
-        </div>
-    }
-    <style>
-        .product-details {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
-
-        .field {
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-
-        strong {
-            color: #333;
-        }
-    </style> *@
-@*     <div class="card">
-        <table>
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Бренд</th>
-                    <th scope="col">Модель</th>
-                    <th scope="col">Описание</th>
-                    <th scope="col">Картинка</th>
-                    <th scope="col">Категория</th>
-                    <th scope="col">Цена</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Product item in @Model)
-                {
-                    <tr>
-                        <th scope="row">@item.Id</th>
-                        <td>@item.Brand</td>
-                        <td>@item.Model</td>
-                        <td>@item.Description</td>
-                        <td><img src="@item.Image" width="100"/></td>
-                        <td>@item.Category</td>
-                        <td>@item.Price</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div> *@
-@* </div> *@
 

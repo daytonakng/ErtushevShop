@@ -2,10 +2,6 @@ html {
   font-size: 14px;
 }
 
-/*#order-block {
-    display: none;
-}*/
-
 td a {
     text-decoration: none;
     color: black;
@@ -29,7 +25,7 @@ td a {
 }
 
 .header {
-    z-index: 1000; /* Чтобы шапка была сверху всех элементов */
+    z-index: 1000;
     width: 100%;
 }
 
@@ -49,7 +45,6 @@ td a {
     text-overflow: ellipsis;
 }
 
-/* Отступы для иконок */
 .header-actions a {
     padding: 0.25rem;
     border-radius: 50%;
@@ -60,7 +55,6 @@ td a {
     color: #007bff;
 }
 
-/* Стили для бейджей (количество товаров) */
 .badge {
     font-size: 0.6rem;
     min-width: 1.2rem;
@@ -132,40 +126,35 @@ select:active {
     box-shadow: none !important;
 }
 
-/* Общий контейнер корзины */
 .cart-items {
     margin-bottom: 2rem;
 }
 
-    /* Карточка товара в корзине */
-    .cart-items .card {
-        border: 1px solid #e9ecef;
-        border-radius: 0.5rem;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+.cart-items .card {
+    border: 1px solid #e9ecef;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .cart-items .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
-        .cart-items .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
+.cart-items .me-3 {
+    flex-shrink: 0;
+}
 
-    /* Блок с изображением товара */
-    .cart-items .me-3 {
-        flex-shrink: 0;
-    }
+.cart-items h5 {
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+}
 
-    /* Информация о товаре */
-    .cart-items h5 {
-        margin-bottom: 0.25rem;
-        font-size: 1rem;
-    }
+.cart-items p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
 
-    .cart-items p {
-        margin-bottom: 0;
-        font-size: 0.9rem;
-    }
-
-/* Блок количества */
 .quantity-input {
     text-align: center;
     padding: 0.375rem 0.75rem;
@@ -180,7 +169,6 @@ select:active {
     border-radius: 0;
 }
 
-/* Кнопка удаления */
 .btn-link.text-danger {
     color: #dc3545;
     text-decoration: none;
@@ -189,27 +177,25 @@ select:active {
     align-items: center;
 }
 
-    .btn-link.text-danger:hover {
-        color: #c82333;
-        text-decoration: underline;
-    }
+.btn-link.text-danger:hover {
+    color: #c82333;
+    text-decoration: underline;
+}
 
-/* Итоговый блок */
 .card.mt-4 {
     background-color: #f8f9fa;
     border-radius: 0.5rem;
 }
 
-    .card.mt-4 .card-body {
-        padding: 1.5rem;
-    }
+.card.mt-4 .card-body {
+    padding: 1.5rem;
+}
 
 #total-price {
     color: #0d6efd;
     font-weight: 600;
 }
 
-/* Форма оформления заказа */
 .card-header {
     background-color: #f8f9fa;
     border-bottom: 1px solid #dee2e6;
@@ -219,6 +205,7 @@ select:active {
 .form-label {
     font-weight: 500;
     color: #495057;
+    text-align: left;
 }
 
 .form-control {
@@ -227,17 +214,27 @@ select:active {
     border: 1px solid #ced4da;
 }
 
-    .form-control:focus {
-        border-color: #86b7fe;
-        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-    }
+.form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
 
 textarea.form-control {
     resize: vertical;
     min-height: 100px;
 }
 
-/* Кнопка оформления заказа */
+.total {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.actions {
+    margin-top: 20px;
+}
+
 .btn.btn-success.w-100 {
     background-color: #198754;
     border-color: #198754;
@@ -247,12 +244,11 @@ textarea.form-control {
     transition: background-color 0.2s ease;
 }
 
-    .btn.btn-success.w-100:hover {
-        background-color: #157347;
-        border-color: #157347;
-    }
+.btn.btn-success.w-100:hover {
+    background-color: #157347;
+    border-color: #157347;
+}
 
-/* Модальное окно */
 .modal-content {
     border-radius: 0.75rem;
     box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
@@ -277,7 +273,6 @@ textarea.form-control {
     padding: 1rem 2rem 1.5rem;
 }
 
-/* Адаптивность */
 @media (max-width: 992px) {
     .card {
         margin-bottom: 1.5rem;

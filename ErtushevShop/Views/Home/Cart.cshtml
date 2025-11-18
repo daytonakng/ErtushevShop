@@ -49,7 +49,8 @@ else
                         <td class="del-product">
                             <form asp-action="RemoveFromCart" method="post" style="display:inline;">
                                 <input type="hidden" name="id" value="@item.ProductId" />
-                                <button type="submit" class="btn btn-sm btn-danger">Удалить</button>
+                                <button type="submit" 
+                                    class="btn btn-sm btn-danger">Удалить</button>
                             </form>
                         </td>
                     </tr>
@@ -64,60 +65,52 @@ else
         </div>
     </div>
 
-    <!-- Кнопки действий -->
     <div class="actions mt-3 mb-5 d-flex justify-content-between">
         <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Вернуться к каталогу</a>
         <button class="btn btn-success" id="orderBtn" onclick="showOrderForm('order-block')">Оформить заказ</button>
     </div>
-    <div class="col-lg-4" id="order-block">
+    <div class="col-lg-8" id="order-block">
         <div class="card">
-            <div class="card-header">
-                <h5>Оформление заказа</h5>
-            </div>
             <div class="card-body">
                 <form id="orderForm">
-                    <div class="mb-3">
-                        <label for="lastName" class="form-label">Фамилия</label>
-                        <input type="text" class="form-control" id="lastName" required>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="lastName" class="form-label">Фамилия</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Иванов" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="firstName" class="form-label">Имя</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="Иван" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="middleName" class="form-label">Отчество (при наличии)</label>
+                                <input type="text" class="form-control" id="middleName" placeholder="Иванович">
+                            </div>
+                            <div class="mb-0">
+                                <button type="submit" class="btn btn-success w-50 mt-5">
+                                    Оформить заказ
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Телефон</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="79998887766" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="example@mail.ru" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Адрес доставки</label>
+                                <textarea class="form-control" id="address" rows="3" placeholder="г. Москва, Московская обл., пр. Мира 12-2" required style="resize: none;"></textarea>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="firstName" class="form-label">Имя</label>
-                        <input type="text" class="form-control" id="firstName" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="middleName" class="form-label">Отчество</label>
-                        <input type="text" class="form-control" id="middleName">
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Телефон</label>
-                        <input type="tel" class="form-control" id="phone" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Адрес доставки</label>
-                        <textarea class="form-control" id="address" rows="3" required style="resize: none;"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-success w-100">
-                        Оформить заказ
-                    </button>
                 </form>
             </div>
         </div>
     </div>
 }
-
-<style>
-    .total {
-        margin-top: 20px;
-        padding: 15px;
-        background-color: #f8f9fa;
-        border-radius: 8px;
-    }
-
-    .actions {
-        margin-top: 20px;
-    }
-</style>
