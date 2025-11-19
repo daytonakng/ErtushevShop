@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Data;
 using System.Diagnostics;
+using System.Net;
+using System.Numerics;
 using System.Text.Json;
 
 namespace ErtushevShop.Controllers
@@ -222,6 +224,85 @@ namespace ErtushevShop.Controllers
         public IActionResult Profile()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(int totalAmount, string lastName, string firstName, string middleName, string phone, string email, string address)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Cart", _cartService.GetCart());
+            }
+
+            var cartItems = _cartService.GetCart();
+
+            List<Product> products = GetProductsFromDB();
+
+            foreach (var item in cartItems)
+            {
+                item.Product = products.FirstOrDefault(p => p.Id == item.ProductId);
+            }
+
+            if (!cartItems.Any())
+            {
+                ModelState.AddModelError("", "Корзина пуста");
+                return View("Cart", cartItems);
+            }
+            DateTime today = DateTime.UtcNow.Date;
+            
+            var order = new Order
+            {
+                OrderId = Random.Shared.Next(1112,9999),
+                FirstName = firstName,
+                LastName = lastName,
+                MiddleName = middleName,
+                Phone = phone,
+                Email = email,
+                Address = address,
+                TotalAmount = totalAmount,
+                CreatedAt = today,
+                Items = cartItems
+            };
+
+            var addQuery = $"insert into orders values ({order.OrderId}, '{order.LastName}', '{order.FirstName}', '{order.MiddleName}', '{order.Phone}', '{order.Email}', '{order.Address}', {order.TotalAmount}, '{order.CreatedAt.ToShortDateString()}')";
+            database.GetData(addQuery);
+
+            return RedirectToAction("Order", new {id = order.OrderId});
+        }
+
+        public IActionResult Order(int id)
+        {
+            DataTable dt = new DataTable();
+            dt = database.GetData($"select * from orders where id = {id};");
+
+            var row = dt.Rows[0];
+
+            var cartItems = _cartService.GetCart();
+
+            List<Product> products = GetProductsFromDB();
+
+            foreach (var item in cartItems)
+            {
+                item.Product = products.FirstOrDefault(p => p.Id == item.ProductId);
+            }
+
+            Order order = new Order
+            {
+                OrderId = Convert.ToInt32(row[0]),
+                FirstName = row[2].ToString(),
+                LastName = row[1].ToString(),
+                MiddleName = row[3].ToString(),
+                Phone = row[4].ToString(),
+                Email = row[5].ToString(),
+                Address = row[6].ToString(),
+                TotalAmount = Convert.ToInt32(row[7]),
+                CreatedAt = DateTime.Parse(row[8].ToString()),
+                Items = cartItems
+            };
+
+            _cartService.ClearCart();
+
+            return View(order);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

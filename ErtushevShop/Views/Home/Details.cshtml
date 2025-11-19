@@ -42,7 +42,7 @@
             }
 
             <div class="d-flex gap-2 mb-4">
-                <form id="addToCartForm" asp-action="AddToCart" method="post">
+                <form id="addToCartForm" asp-action="AddToCart" method="post" onsubmit="showAddToCartToast()">
                     <input type="hidden" name="id" value="@Model.Id" />
                     <button type="submit"
                         class="btn btn-lg btn-outline-success"

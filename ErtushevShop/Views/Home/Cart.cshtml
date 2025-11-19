@@ -14,56 +14,64 @@
 }
 else
 {
-    <div class="block-table">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Товар</th>
-                    <th>Цена</th>
-                    <th>Количество</th>
-                    <th>Сумма</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+    <div class="card mb-5">
+        <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">Корзина</h5>
+        </div>
+        <div class="block-table">
+            <table class="table">
+                <thead>
                     <tr>
-                        <td>
-                            <img src="@item.Product.Image" width="50" alt="@item.Product.Brand @item.Product.Model" />
-                            <a href="/Home/Details/@item.Product.Id">@item.Product.Brand @item.Product.Model</a>
-                        </td>
-                        <td>@item.Product.Price.ToString("C")</td>
-                        <td>
-                            <form asp-action="UpdateQuantity" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="@item.ProductId" />
-                                <input type="number" name="quantity" value="@item.Quantity" min="1" style="width:60px;" />
-                                <button type="submit" 
-                                    class="btn btn-sm btn-outline-primary"
-                                    title="Обновить">
-                                    <i class="bi bi-arrow-clockwise"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>@((item.Product.Price * item.Quantity).ToString("C"))</td>
-                        <td class="del-product">
-                            <form asp-action="RemoveFromCart" method="post" style="display:inline;">
-                                <input type="hidden" name="id" value="@item.ProductId" />
-                                <button type="submit" 
-                                    class="btn btn-sm btn-danger">Удалить</button>
-                            </form>
-                        </td>
+                        <th>Товар</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Сумма</th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-        <div class="d-flex justify-content-between align-items-center">
-            <h5>Итого:</h5>
-            <span class="fs-4 fw-bold">
-                @string.Format("{0:C}", @Model.Sum(item => item.Product.Price * item.Quantity))
-            </span>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@item.Product.Image" width="50" alt="@item.Product.Brand @item.Product.Model" />
+                                <a href="/Home/Details/@item.Product.Id">@item.Product.Brand @item.Product.Model</a>
+                            </td>
+                            <td>@item.Product.Price.ToString("C")</td>
+                            <td>
+                                <form asp-action="UpdateQuantity" method="post" style="display:inline;">
+                                    <input type="hidden" name="id" value="@item.ProductId" />
+                                    <input type="number" name="quantity" value="@item.Quantity" min="1" style="width:60px;" />
+                                    <button type="submit"
+                                            class="btn btn-sm btn-outline-primary"
+                                            title="Обновить">
+                                        <i class="bi bi-arrow-clockwise"></i>
+                                    </button>
+                                </form>
+                            </td>
+                            <td>@((item.Product.Price * item.Quantity).ToString("C"))</td>
+                            <td class="del-product">
+                                <form asp-action="RemoveFromCart" method="post" style="display:inline;">
+                                    <input type="hidden" name="id" value="@item.ProductId" />
+                                    <button type="submit"
+                                            class="btn btn-sm btn-danger">
+                                        Удалить
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="d-flex justify-content-between align-items-center">
+                <h5>Итого:</h5>
+                <span class="fs-4 fw-bold">
+                    @string.Format("{0:C}", @Model.Sum(item => item.Product.Price * item.Quantity))
+                </span>
+            </div>
         </div>
     </div>
+
 
     <div class="actions mt-3 mb-5 d-flex justify-content-between">
         <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Вернуться к каталогу</a>
@@ -72,23 +80,26 @@ else
     <div class="col-lg-8" id="order-block">
         <div class="card">
             <div class="card-body">
-                <form id="orderForm">
+                <form id="orderForm" method="post"  asp-action="Create">
+                    <input type="hidden" name="totalamount" value="@Model.Sum(item => item.Product.Price * item.Quantity)" />
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Фамилия</label>
-                                <input type="text" class="form-control" id="lastName" placeholder="Иванов" required>
+                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Иванов" required>
                             </div>
                             <div class="mb-3">
                                 <label for="firstName" class="form-label">Имя</label>
-                                <input type="text" class="form-control" id="firstName" placeholder="Иван" required>
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Иван" required>
                             </div>
                             <div class="mb-3">
                                 <label for="middleName" class="form-label">Отчество (при наличии)</label>
-                                <input type="text" class="form-control" id="middleName" placeholder="Иванович">
+                                <input type="text" class="form-control" id="middleName" name="middleName" placeholder="Иванович">
                             </div>
                             <div class="mb-0">
-                                <button type="submit" class="btn btn-success w-50 mt-5">
+                                <button type="submit" 
+                                    class="btn btn-success w-50 mt-5"
+                                    >
                                     Оформить заказ
                                 </button>
                             </div>
@@ -97,15 +108,15 @@ else
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Телефон</label>
-                                <input type="tel" class="form-control" id="phone" placeholder="79998887766" required>
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="79998887766" required>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="example@mail.ru" required>
+                                <input type="email" class="form-control" id="email" name="email"  placeholder="example@mail.ru" required>
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Адрес доставки</label>
-                                <textarea class="form-control" id="address" rows="3" placeholder="г. Москва, Московская обл., пр. Мира 12-2" required style="resize: none;"></textarea>
+                                <textarea class="form-control" id="address" name="address" rows="3" placeholder="г. Москва, Московская обл., пр. Мира 12-2" required style="resize: none;"></textarea>
                             </div>
                         </div>
                     </div>

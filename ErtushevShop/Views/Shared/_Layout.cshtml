@@ -50,6 +50,19 @@
         </main>
     </div>
 
+    <!-- Контейнер для toast -->
+    <div aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="addToCartToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto">Товар добавлен!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Товар успешно добавлен в корзину
+            </div>
+        </div>
+    </div>
+
     <footer class="border-top bg-white footer text-muted">
         <div class="container">
             &copy; 2025 - ActionLens

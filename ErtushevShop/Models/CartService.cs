@@ -1,9 +1,12 @@
-﻿using System.Text.Json;
+﻿using System.Data;
+using System.Text.Json;
 
 namespace ErtushevShop.Models
 {
     public class CartService
     {
+
+        Database database = new Database();
         private readonly ISession _session;
 
         public CartService(IHttpContextAccessor httpContextAccessor)
@@ -49,6 +52,12 @@ namespace ErtushevShop.Models
                 item.Quantity = quantity;
 
             _session.SetString("Cart", JsonSerializer.Serialize(cart));
+        }
+
+        public void ClearCart()
+        {
+            var cart = GetCart();
+            cart.Clear();
         }
     }
 

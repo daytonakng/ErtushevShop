@@ -81,7 +81,9 @@
                                 }
                             </div>
                             <div class="card-body d-flex flex-column justify-content-between">
-                                <h5 class="card-title">@product.Brand @product.Model</h5>
+                                <a class="card-title-a" href="/Home/Details/@product.Id" >
+                                    <h5 class="card-title">@product.Brand @product.Model</h5>
+                                </a>
                                 <p class="card-text text-secondary fst-italic">
                                     @product.Category
                                 </p>
@@ -97,9 +99,8 @@
                                         <form asp-action="AddToCartFromIndex" method="post">
                                             <input type="hidden" name="id" value="@product.Id" />
                                             <button type="submit"
-                                                class="btn btn-sm btn-outline-success"
-                                                title="В корзину">
-                                                <i class="bi bi-basket"></i>
+                                                class="btn btn-sm btn-outline-success">
+                                                <i class="bi bi-basket"></i> Купить
                                             </button>
                                         </form>
 
@@ -112,10 +113,10 @@
                                             </button>
                                         </form>
 
-                                        <a href="/Home/Details/@product.Id"
+@*                                         <a href="/Home/Details/@product.Id"
                                            class="btn btn-sm btn-outline-primary">
                                             Подробнее
-                                        </a>
+                                        </a> *@
                                     </div>
                                 </div>
                             </div>
