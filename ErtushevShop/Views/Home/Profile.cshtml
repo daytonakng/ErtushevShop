@@ -1,4 +1,66 @@
-﻿@{
-    ViewData["Title"] = "Профиль";
+﻿@model User
+
+@{
+    ViewData["Title"] = "Профиль пользователя";
 }
-<h1>@ViewData["Title"]</h1>
+
+<div class="card mb-5">
+    <div class="card-header bg-primary text-white">
+        <h5 class="card-title mb-0">Профиль</h5>
+    </div>
+
+    <form method="post" class="p-3" onsubmit="showEditProfile()">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="LastName" class="form-label">Фамилия</label>
+                        <input type="text" class="form-control" name="lastName" placeholder="Иванов" value="@Model.LastName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="FirstName" class="form-label">Имя</label>
+                        <input type="text" class="form-control" name="firstName" placeholder="Иван" value="@Model.FirstName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="MiddleName" class="form-label">Отчество</label>
+                        <input type="text" class="form-control" name="middleName" placeholder="Иванович" value="@Model.MiddleName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Phone" class="form-label">Телефон</label>
+                        <input type="tel" class="form-control" name="phone" placeholder="79998887766" value="@Model.Phone">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="ivanov@mail.ru" value="@Model.Email">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="Login" class="form-label">Логин</label>
+                        <input type="text" class="form-control" name="login" value="@Model.Login">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Password" class="form-label">Пароль</label>
+                        <input type="password" class="form-control" name="password" value="@Model.Password">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit"
+                    id="btn-saveprofile"
+                    class="btn btn-primary"
+                    onclick="editProfile(this)">
+                Сохранить
+            </button>
+            <button class="btn btn-danger" type="button" onclick="window.location.href='/Home/Logout'">Выйти</button>
+        </div>
+    </form>
+</div>

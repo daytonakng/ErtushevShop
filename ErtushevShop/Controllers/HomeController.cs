@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using System;
 using System.Data;
 using System.Diagnostics;
@@ -22,6 +23,8 @@ namespace ErtushevShop.Controllers
             _logger = logger;
             _cartService = cartService;
         }
+
+        public bool IsEditing { get; set; }
 
         private readonly CartService _cartService;
 
@@ -194,13 +197,6 @@ namespace ErtushevShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddToCartFromIndex(int id)
-        {
-            _cartService.AddToCart(id);
-            return RedirectToAction("Index");
-        }
-
-        [HttpPost]
         public IActionResult RemoveFromCart(int id)
         {
             _cartService.RemoveFromCart(id);
@@ -221,9 +217,90 @@ namespace ErtushevShop.Controllers
             return View(viewModel);
         }
 
-        public IActionResult Profile()
+        private List<User> GetUsersFromDb()
+        {
+            DataTable dt = new DataTable();
+            dt = database.GetData("select * from users;");
+            List<User> users = new List<User>();
+            foreach (DataRow row in dt.Rows)
+            {
+                User user = new User(
+                    id: Convert.ToInt32(row[0]),
+                    login: row[1].ToString(),
+                    password: row[2].ToString(),
+                    lastname: row[3].ToString(),
+                    firstname: row[4].ToString(),
+                    middlename: row[5].ToString(),
+                    email: row[6].ToString(),
+                    phone: row[7].ToString()
+                    );
+                users.Add(user);
+            }
+            return users;
+        }
+
+        public IActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(string username, string password)
+        {
+            List<User> users = GetUsersFromDb();
+
+            var user = users.FirstOrDefault(u => u.Login == username && u.Password == password);
+
+            if (user != null)
+            {
+                HttpContext.Session.SetString("Username", user.Login);
+                return Json(new { success = true, redirectUrl = Url.Action("Index", "Home") });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Неверное имя или пароль." });
+            }
+        }
+
+        public ActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public JsonResult Register(string username, string password)
+        {
+            List<User> users = GetUsersFromDb();
+
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                return Json(new { success = false, message = "Заполните все поля." });
+            }
+
+            if (users.Any(u => u.Login == username))
+            {
+                return Json(new { success = false, message = "Пользователь с таким именем уже существует." });
+            }
+
+            User newUser = new User(
+                id: Random.Shared.Next(11111, 99999),
+                login: username,
+                password: password,
+                lastname: null,
+                firstname: null,
+                middlename: null,
+                email: null,
+                phone: null
+                );
+
+
+            users.Add(newUser);
+
+            var addQuery = $"insert into users values ({newUser.Id}, '{newUser.Login}', '{newUser.Password}')";
+            database.GetData(addQuery);
+
+            return Json(new { success = true, message = "Регистрация успешна! Теперь можно войти." });
         }
 
         [HttpPost]
@@ -252,7 +329,7 @@ namespace ErtushevShop.Controllers
             
             var order = new Order
             {
-                OrderId = Random.Shared.Next(1112,9999),
+                OrderId = Random.Shared.Next(111111111,999999999),
                 FirstName = firstName,
                 LastName = lastName,
                 MiddleName = middleName,
@@ -303,6 +380,68 @@ namespace ErtushevShop.Controllers
             _cartService.ClearCart();
 
             return View(order);
+        }
+
+        public IActionResult Profile()
+        {
+            var username = HttpContext.Session.GetString("Username");
+
+            DataTable dt = new DataTable();
+            dt = database.GetData($"select * from users where username = '{username}';");
+
+            User user = new User(0, null, null, null, null, null, null, null);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                user.Id = Convert.ToInt32(row[0]);
+                user.Login = row[1].ToString();
+                user.Password = row[2].ToString();
+                user.LastName = row[3].ToString();
+                user.FirstName = row[4].ToString();
+                user.MiddleName = row[5].ToString();
+                user.Email = row[6].ToString();
+                user.Phone = row[7].ToString();
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult EditProfile(string lastName, string firstName, string middleName, string phone, string email, string login, string password)
+        {
+            var username = HttpContext.Session.GetString("Username");
+            DataTable dt = new DataTable();
+            dt = database.GetData($"select * from users where username = '{username}';");
+
+            User user = new User(0, null, null, null, null, null, null, null);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                user.Id = Convert.ToInt32(row[0]);
+                user.Login = row[1].ToString();
+                user.Password = row[2].ToString();
+                user.LastName = row[3].ToString();
+                user.FirstName = row[4].ToString();
+                user.MiddleName = row[5].ToString();
+                user.Email = row[6].ToString();
+                user.Phone = row[7].ToString();
+            }
+
+            if (ModelState.IsValid)
+            {
+                user.LastName = lastName;
+                user.FirstName = firstName;
+                user.MiddleName = middleName;
+                user.Phone = phone;
+                user.Email = email;
+                user.Login = login;
+                user.Password = password;
+
+                var addQuery = $"update users set lastname = '{user.LastName}', firstname = '{user.FirstName}', middlename = '{user.MiddleName}', phone = '{user.Phone}', email = '{user.Email}', username = '{user.Login}', password = '{user.Password}' where id = {user.Id}";
+                database.GetData(addQuery);
+
+                HttpContext.Session.SetString("Username", user.Login);
+            }
+            return View(user);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

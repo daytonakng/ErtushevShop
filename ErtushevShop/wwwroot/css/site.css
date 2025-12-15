@@ -11,6 +11,10 @@ td a, .card-title-a {
         color: #0d6efd;
     }
 
+.cart-price {
+    text-align: center;
+}
+
 
 .table td {
     vertical-align: middle;
@@ -300,6 +304,28 @@ textarea.form-control {
 .info {
     background-color: white;
     border-radius: 0.5rem;
+}
+
+.container.mt-5 {
+    color: white;
+}
+
+.btn-profile {
+    /*background-color: white;*/
+    border-radius: 0.5rem;
+    text-decoration: none;
+    /*border: 2.5px solid #007bff;*/
+    font-weight: 500;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.2rem 0.6rem;
+}
+
+.btn-profile:hover {
+    background-color: #1c5ab4;
+/*    color: white;*/
+    transition: .2s linear;
 }
 
 @media (max-width: 992px) {

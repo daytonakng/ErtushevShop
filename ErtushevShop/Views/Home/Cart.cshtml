@@ -1,4 +1,5 @@
-﻿@model List<CartItem>
+﻿@using System.Data
+@model List<CartItem>
 
 @{
     ViewData["Title"] = "Корзина";
@@ -72,6 +73,24 @@ else
         </div>
     </div>
 
+    Database database = new Database();
+    var username = Context.Session.GetString("Username");
+    DataTable dt = new DataTable();
+    dt = database.GetData($"select * from users where username = '{username}';");
+
+    User user = new User(0, null, null, null, null, null, null, null);
+
+    foreach (DataRow row in dt.Rows)
+    {
+        user.Id = Convert.ToInt32(row[0]);
+        user.Login = row[1].ToString();
+        user.Password = row[2].ToString();
+        user.LastName = row[3].ToString();
+        user.FirstName = row[4].ToString();
+        user.MiddleName = row[5].ToString();
+        user.Email = row[6].ToString();
+        user.Phone = row[7].ToString();
+    }
 
     <div class="actions mt-3 mb-5 d-flex justify-content-between">
         <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Вернуться к каталогу</a>
@@ -86,15 +105,15 @@ else
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="lastName" class="form-label">Фамилия</label>
-                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Иванов" required>
+                                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Иванов" value="@user.LastName" required>
                             </div>
                             <div class="mb-3">
                                 <label for="firstName" class="form-label">Имя</label>
-                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Иван" required>
+                                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Иван" value="@user.FirstName" required>
                             </div>
                             <div class="mb-3">
                                 <label for="middleName" class="form-label">Отчество (при наличии)</label>
-                                <input type="text" class="form-control" id="middleName" name="middleName" placeholder="Иванович">
+                                <input type="text" class="form-control" id="middleName" name="middleName" placeholder="Иванович" value="@user.MiddleName">
                             </div>
                             <div class="mb-0">
                                 <button type="submit" 
@@ -108,15 +127,15 @@ else
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Телефон</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="79998887766" required>
+                                <input type="tel" class="form-control" id="phone" name="phone" placeholder="79998887766" value="@user.Phone" required>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email"  placeholder="example@mail.ru" required>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="example@mail.ru" value="@user.Email" required>
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Адрес доставки</label>
-                                <textarea class="form-control" id="address" name="address" rows="3" placeholder="г. Москва, Московская обл., пр. Мира 12-2" required style="resize: none;"></textarea>
+                                <textarea class="form-control" id="address" name="address" rows="3" required style="resize: none;"></textarea>
                             </div>
                         </div>
                     </div>

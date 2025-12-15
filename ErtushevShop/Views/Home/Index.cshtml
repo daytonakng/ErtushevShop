@@ -96,10 +96,11 @@
                                         @string.Format("{0:C}", product.Price)
                                     </span>
                                     <div class="d-flex gap-2">
-                                        <form asp-action="AddToCartFromIndex" method="post">
+                                        <form class="add-to-cart-form" asp-action="AddToCart" method="post" onsubmit="showAddToCartToast()">
                                             <input type="hidden" name="id" value="@product.Id" />
                                             <button type="submit"
-                                                class="btn btn-sm btn-outline-success">
+                                                class="btn btn-sm btn-outline-success"
+                                                    onclick="handleAddToCart(this)">
                                                 <i class="bi bi-basket"></i> Купить
                                             </button>
                                         </form>
@@ -112,11 +113,6 @@
                                                 <i class="bi bi-heart"></i>
                                             </button>
                                         </form>
-
-@*                                         <a href="/Home/Details/@product.Id"
-                                           class="btn btn-sm btn-outline-primary">
-                                            Подробнее
-                                        </a> *@
                                     </div>
                                 </div>
                             </div>
