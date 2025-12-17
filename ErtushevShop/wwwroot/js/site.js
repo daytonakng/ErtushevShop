@@ -2,16 +2,19 @@
 function showOrderForm(id) {
     elem = document.getElementById(id);
     btn = document.getElementById('orderBtn');
+    clearBtn = document.getElementById('clearCartBtn');
     state = elem.style.display;
     if (state == 'none') {
         elem.style.display = 'block';
         btn.innerText = 'Отменить оформление';
         btn.style.backgroundColor = "#bb2d3b";
+        clearBtn.style.display = 'none';
     }
     else {
         elem.style.display = 'none';
         btn.innerText = 'Оформить заказ';
         btn.style.backgroundColor = "#157347";
+        clearBtn.style.display = 'block';
 
         form = document.getElementById("orderForm");
 

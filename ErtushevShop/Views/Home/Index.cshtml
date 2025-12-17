@@ -5,7 +5,7 @@
 }
 
 <div class="text-center">
-    <form method="get" class="row g-3 mb-4">
+    <form method="get" class="row g-3 mb-1">
         <div class="col-md-3">
             <label class="form-label">Поиск по названию</label>
             <input type="text"
@@ -13,20 +13,6 @@
                    name="searchTerm"
                    value="@Context.Request.Query["searchTerm"]"
                    placeholder="Введите название..." />
-        </div>
-
-        <div class="col-md-3">
-            <label class="form-label">Категория</label>
-            <select class="form-select" name="selectedCategory">
-                <option value="">Все категории</option>
-                @foreach (var category in ViewBag.Categories)
-                {
-                    <option value="@category"
-                            selected="@(Context.Request.Query["selectedCategory"] == category)">
-                        @category
-                    </option>
-                }
-            </select>
         </div>
 
         <div class="col-md-3">
@@ -52,12 +38,40 @@
             </select>
         </div>
 
+        <div class="col-md-3">
+            <label class="form-label">Категория</label>
+            <select class="form-select" name="selectedCategory">
+                <option value="">Все категории</option>
+                @foreach (var category in ViewBag.Categories)
+                {
+                    <option value="@category"
+                            selected="@(Context.Request.Query["selectedCategory"] == category)">
+                        @category
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Бренд</label>
+            <select class="form-select" name="selectedBrand">
+                <option value="">Все бренды</option>
+                @foreach (var brand in ViewBag.Brands)
+                {
+                    <option value="@brand"
+                            selected="@(Context.Request.Query["selectedBrand"] == brand)">
+                        @brand
+                    </option>
+                }
+            </select>
+        </div>
+
         <div class="col-md-3 d-flex align-items-end">
             <button type="submit" class="btn btn-primary">Применить</button>
             <a href="/" class="btn btn-secondary ms-2">Сбросить</a>
         </div>
     </form>
-    <div class="row mt-5 mb-2">
+    <div class="row mt-1 mb-2">
 
         @if (!Model.Any())
         {
@@ -70,7 +84,7 @@
                 {
                     <div class="col">
                         <div class="card h-100 shadow-sm">
-                            <div class="d-flex justify-content-center align-items-center" style="height: 200px;">
+                            <div class="d-flex justify-content-center align-items-center" style="height: 200px; padding-top: 1rem">
                                 @if (!string.IsNullOrEmpty(product.Image))
                                 {
                                     <img src="@product.Image" class="img-fluid rounded" alt="@product.Brand @product.Model" style="max-height: 100%; max-width: 100%;">

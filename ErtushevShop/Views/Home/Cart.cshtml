@@ -94,7 +94,10 @@ else
 
     <div class="actions mt-3 mb-5 d-flex justify-content-between">
         <a href="@Url.Action("Index", "Home")" class="btn btn-secondary">Вернуться к каталогу</a>
-        <button class="btn btn-success" id="orderBtn" onclick="showOrderForm('order-block')">Оформить заказ</button>
+        <div class="d-flex gap-2">
+            <button class="btn btn-danger" id="clearCartBtn" type="button" onclick="window.location.href='/Home/ClearAllCart'">Очистить корзину</button>
+            <button class="btn btn-success" id="orderBtn" onclick="showOrderForm('order-block')">Оформить заказ</button>
+        </div>
     </div>
     <div class="col-lg-8" id="order-block">
         <div class="card">
@@ -115,13 +118,7 @@ else
                                 <label for="middleName" class="form-label">Отчество (при наличии)</label>
                                 <input type="text" class="form-control" id="middleName" name="middleName" placeholder="Иванович" value="@user.MiddleName">
                             </div>
-                            <div class="mb-0">
-                                <button type="submit" 
-                                    class="btn btn-success w-50 mt-5"
-                                    >
-                                    Оформить заказ
-                                </button>
-                            </div>
+
                         </div>
 
                         <div class="col-md-6">
@@ -137,6 +134,12 @@ else
                                 <label for="address" class="form-label">Адрес доставки</label>
                                 <textarea class="form-control" id="address" name="address" rows="3" required style="resize: none;"></textarea>
                             </div>
+                        </div>
+                        <div class="mb-0">
+                            <button type="submit"
+                                    class="btn btn-success w-40 mt-5">
+                                Оформить заказ
+                            </button>
                         </div>
                     </div>
                 </form>

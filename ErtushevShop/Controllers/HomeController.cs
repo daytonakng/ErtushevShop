@@ -53,12 +53,27 @@ namespace ErtushevShop.Controllers
             return productList;
         }
 
-        public IActionResult Index(string searchTerm = null, string selectedCategory = null, string sortBy = null)
+        public IActionResult Index(string searchTerm = null, string selectedCategory = null, string selectedBrand = null, string sortBy = null)
         {
             List<Product> products = GetProductsFromDB();
 
             ViewBag.Categories = products
                 .Select(p => p.Category)
+                .Distinct()
+                .ToList();
+
+            ViewBag.Brands = products
+                .Select(p => p.Brand)
+                .Distinct()
+                .ToList();
+
+            ViewBag.Categories = products
+                .Select(p => p.Category)
+                .Distinct()
+                .ToList();
+
+            ViewBag.Brands = products
+                .Select(p => p.Brand)
                 .Distinct()
                 .ToList();
 
@@ -73,6 +88,11 @@ namespace ErtushevShop.Controllers
             if (!string.IsNullOrEmpty(selectedCategory))
             {
                 products = products.Where(p => p.Category == selectedCategory).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(selectedBrand))
+            {
+                products = products.Where(p => p.Brand == selectedBrand).ToList();
             }
 
             products = ApplySorting(products, sortBy);
@@ -268,6 +288,16 @@ namespace ErtushevShop.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult ClearAllCart()
+        {
+            var cartItems = _cartService.GetCart();
+            foreach (var item in cartItems)
+            {
+                _cartService.RemoveFromCart(item.ProductId);
+            }
+            return RedirectToAction("Cart", "Home");
+        }
+
         [HttpPost]
         public JsonResult Register(string username, string password)
         {
@@ -377,7 +407,10 @@ namespace ErtushevShop.Controllers
                 Items = cartItems
             };
 
-            _cartService.ClearCart();
+            foreach (var item in cartItems)
+            {
+                _cartService.RemoveFromCart(item.ProductId);
+            }
 
             return View(order);
         }

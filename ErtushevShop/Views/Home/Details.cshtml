@@ -6,12 +6,13 @@
 <div class="container my-5">
     <div class="item row">
         <div class="col-md-6">
-            <div class="position-relative">
+            <div class="position-relative d-flex justify-content-center align-items-center">
                 @if (!string.IsNullOrEmpty(Model.Image))
                 {
                     <img src="@Model.Image" 
                          alt="@Model.Brand @Model.Model"
-                         style="max-height: 500px; object-fit: contain;">
+                         id="details-img"
+                         style="object-fit: contain;">
                 }
                 else
                 {
