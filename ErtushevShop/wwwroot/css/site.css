@@ -60,10 +60,6 @@ td a, .card-title-a {
     transition: color 0.2s ease;
 }
 
-.card.h-100.shadow-sm:hover {
-    box-shadow: 0px 10px 30px 0px blue;
-    transition: .2s linear;
-}
 
 .header-actions a:hover {
     color: #007bff;
@@ -89,7 +85,7 @@ td a, .card-title-a {
     transform: scale(0.8);
 }
 
-.col-md-3 label {
+.col-md-2 label {
     color: white;
 }
 
@@ -117,7 +113,7 @@ body {
 
 .item.row {
     background-color: white;
-    border-radius: 10px;
+    border-radius: 1rem;
     padding: 2%;
 }
 
@@ -332,10 +328,10 @@ textarea.form-control {
     transition: .2s linear;
 }
 
-.card.h-100.shadow-sm:hover {
-    box-shadow: 10px 5px 5px red;
-    transition: .2s linear;
+.card.h-100.shadow-sm {
+    border-radius: 1rem;
 }
+
 
 @media (max-width: 992px) {
     .card {

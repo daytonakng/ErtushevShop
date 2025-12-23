@@ -67,16 +67,6 @@ namespace ErtushevShop.Controllers
                 .Distinct()
                 .ToList();
 
-            ViewBag.Categories = products
-                .Select(p => p.Category)
-                .Distinct()
-                .ToList();
-
-            ViewBag.Brands = products
-                .Select(p => p.Brand)
-                .Distinct()
-                .ToList();
-
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 products = products.Where(p =>
@@ -356,10 +346,21 @@ namespace ErtushevShop.Controllers
                 return View("Cart", cartItems);
             }
             DateTime today = DateTime.UtcNow.Date;
-            
+
+            int userId = 0;
+            var username = HttpContext.Session.GetString("Username");
+
+            if (username != null)
+            {
+                DataTable dt = new DataTable();
+                dt = database.GetData($"select id from users where username = '{username}'");
+                userId = Convert.ToInt32(dt.Rows[0][0]);
+            }
+
             var order = new Order
             {
-                OrderId = Random.Shared.Next(111111111,999999999),
+                OrderId = Random.Shared.Next(111111111, 999999999),
+                UserId = userId,
                 FirstName = firstName,
                 LastName = lastName,
                 MiddleName = middleName,
@@ -371,7 +372,7 @@ namespace ErtushevShop.Controllers
                 Items = cartItems
             };
 
-            var addQuery = $"insert into orders values ({order.OrderId}, '{order.LastName}', '{order.FirstName}', '{order.MiddleName}', '{order.Phone}', '{order.Email}', '{order.Address}', {order.TotalAmount}, '{order.CreatedAt.ToShortDateString()}')";
+            var addQuery = $"insert into orders values ({order.OrderId}, '{order.LastName}', '{order.FirstName}', '{order.MiddleName}', '{order.Phone}', '{order.Email}', '{order.Address}', {order.TotalAmount}, '{order.CreatedAt.ToShortDateString()}', {order.UserId})";
             database.GetData(addQuery);
 
             return RedirectToAction("Order", new {id = order.OrderId});

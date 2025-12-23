@@ -1,4 +1,5 @@
-﻿namespace ErtushevShop.Models
+﻿
+namespace ErtushevShop.Models
 {
     public class Product
     {
@@ -24,6 +25,11 @@
         public override string ToString()
         {
             return $"{Brand} {Model}";
+        }
+
+        public static explicit operator Product(List<Cameras> v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

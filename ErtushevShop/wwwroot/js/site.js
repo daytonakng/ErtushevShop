@@ -139,26 +139,6 @@ $(document).ready(function () {
     });
 });
 
-//$(document).ready(function () {
-//    $('#btn-saveprofile').click(function () {
-//        const lastName = $('#lastName').val();
-//        const firstName = $('#firstName').val();
-//        const middleName = $('#middleName').val();
-//        const phone = $('#phone').val();
-//        const email = $('#email').val();
-
-//        $.post('/Home/EditProfile', { lastName: lastName, firstName: firstName, middleName: middleName, phone: phone, email: email }, function (data) {
-//            if (data.success) {
-//                $('#message').removeClass('alert-danger').addClass('alert-success').text(data.message).show();
-//                setTimeout(function () {
-//                }, 2000);
-//            } else {
-//                $('#message').removeClass('alert-success').addClass('alert-danger').text(data.message).show();
-//            }
-//        });
-//    })
-//})
-
 function showEditProfile() {
     const toast = new bootstrap.Toast(document.getElementById('editProfileToast'));
     toast.show();

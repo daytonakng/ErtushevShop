@@ -6,7 +6,7 @@
 
 <div class="text-center">
     <form method="get" class="row g-3 mb-1">
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label class="form-label">Поиск по названию</label>
             <input type="text"
                    class="form-control"
@@ -15,30 +15,30 @@
                    placeholder="Введите название..." />
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label class="form-label">Сортировка</label>
             <select class="form-select" name="sortBy">
                 <option value="">Без сортировки</option>
                 <option value="price_asc"
                         selected="@(Context.Request.Query["sortBy"] == "price_asc")">
-                    Цена: по возрастанию
+                    Цена ↑
                 </option>
                 <option value="price_desc"
                         selected="@(Context.Request.Query["sortBy"] == "price_desc")">
-                    Цена: по убыванию
+                    Цена ↓
                 </option>
                 <option value="name_asc"
                         selected="@(Context.Request.Query["sortBy"] == "name_asc")">
-                    Название: А→Я
+                    Название А→Я
                 </option>
                 <option value="name_desc"
                         selected="@(Context.Request.Query["sortBy"] == "name_desc")">
-                    Название: Я→А
+                    Название Я→А
                 </option>
             </select>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label class="form-label">Категория</label>
             <select class="form-select" name="selectedCategory">
                 <option value="">Все категории</option>
@@ -52,7 +52,7 @@
             </select>
         </div>
 
-        <div class="col-md-3">
+        <div class="col-md-2">
             <label class="form-label">Бренд</label>
             <select class="form-select" name="selectedBrand">
                 <option value="">Все бренды</option>
@@ -66,7 +66,7 @@
             </select>
         </div>
 
-        <div class="col-md-3 d-flex align-items-end">
+        <div class="col-md-2 d-flex align-items-end">
             <button type="submit" class="btn btn-primary">Применить</button>
             <a href="/" class="btn btn-secondary ms-2">Сбросить</a>
         </div>
@@ -116,15 +116,6 @@
                                                 class="btn btn-sm btn-outline-success"
                                                     onclick="handleAddToCart(this)">
                                                 <i class="bi bi-basket"></i> Купить
-                                            </button>
-                                        </form>
-
-                                        <form asp-action="AddToFavorite" method="post">
-                                            <input type="hidden" name="id" value="@product.Id" />
-                                            <button type="submit"
-                                                    class="btn btn-sm btn-outline-danger"
-                                                    title="В избранное">
-                                                <i class="bi bi-heart"></i>
                                             </button>
                                         </form>
                                     </div>
