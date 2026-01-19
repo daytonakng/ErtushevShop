@@ -328,8 +328,29 @@ textarea.form-control {
     transition: .2s linear;
 }
 
+.btn-admin-profile {
+    /*background-color: white;*/
+    border-radius: 0.5rem;
+    text-decoration: none;
+    /*border: 2.5px solid #007bff;*/
+    font-weight: 500;
+    background-color: #7200ff;
+    color: white;
+    border: none;
+    padding: 0.2rem 0.6rem;
+}
+
+.btn-admin-profile:hover {
+    background-color: #40025f;
+    transition: .2s linear;
+}
+
 .card.h-100.shadow-sm {
     border-radius: 1rem;
+}
+.col-card:hover {
+    transform: translateY(-7px);
+    transition: .1s linear;
 }
 
 

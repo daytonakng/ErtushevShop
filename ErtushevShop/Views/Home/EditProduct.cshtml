@@ -1,0 +1,159 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = $"Редактирование товара №{Model.Id}";
+}
+<div class="card mb-5">
+    <div class="card-header bg-primary text-white">
+        <h5 class="card-title mb-0">Редактирование товара</h5>
+    </div>
+
+    <form method="post" class="p-3" onsubmit="showEditProfile()">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="hidden" name="id" value="@Model.Id"/>
+                    <div class="mb-3">
+                        <label for="Brand" class="form-label">Бренд</label>
+                        <input type="text" class="form-control" name="brand" value="@Model.Brand">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Model" class="form-label">Модель</label>
+                        <input type="text" class="form-control" name="model" value="@Model.Model">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Category" class="form-label">Категория</label>
+                        <input type="text" class="form-control" name="category" value="@Model.Category">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Price" class="form-label">Цена</label>
+                        <input type="text" class="form-control" name="price" value="@Model.Price">
+                    </div>
+
+                    @if (Model is Cameras camera)
+                    {
+                        <div class="mb-3">
+                            <label for="SensorSize" class="form-label">Размер сенсора</label>
+                            <input type="text" class="form-control" name="sensorsize" value="@camera.SensorSize">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ShutterSpeed" class="form-label">Выдержка</label>
+                            <input type="text" class="form-control" name="shutterspeed" value="@camera.ShutterSpeed">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Aperture" class="form-label">Диафрагма</label>
+                            <input type="text" class="form-control" name="aperture" value="@camera.Aperture">
+                        </div>
+                        <div class="mb-3">
+                            <label for="IsoRange" class="form-label">Диапазон ISO</label>
+                            <input type="text" class="form-control" name="isorange" value="@camera.IsoRange">
+                        </div>
+                        <div class="mb-3">
+                            <label for="PhotoRes" class="form-label">Разрешение фото</label>
+                            <input type="text" class="form-control" name="photores" value="@camera.PhotoRes">
+                        </div>
+                    }
+                    else if (Model is ActionCameras actioncamera)
+                    {
+                        <div class="mb-3">
+                            <label for="ViewAngle" class="form-label">Угол обзора</label>
+                            <input type="text" class="form-control" name="viewangle" value="@actioncamera.ViewAngle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Depth" class="form-label">Глубина погружения</label>
+                            <input type="text" class="form-control" name="depth" value="@actioncamera.Depth">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Fixation" class="form-label">Крепление</label>
+                            <input type="text" class="form-control" name="fixation" value="@actioncamera.Fixation">
+                        </div>
+                        <div class="mb-3">
+                            <label for="AppManage" class="form-label">Управление через приложение</label>
+                            <input type="text" class="form-control" name="appmanage" value="@actioncamera.AppManage">
+                        </div>
+                        <div class="mb-3">
+                            <label for="IsoRange" class="form-label">Диапазон ISO</label>
+                            <input type="text" class="form-control" name="isorange" value="@actioncamera.IsoRange">
+                        </div>
+                    }
+                    else if (Model is Copters copter)
+                    {
+                        <div class="mb-3">
+                            <label for="Speed" class="form-label">Скорость</label>
+                            <input type="text" class="form-control" name="speed" value="@copter.Speed">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Height" class="form-label">Максимальная высота</label>
+                            <input type="text" class="form-control" name="height" value="@copter.Height">
+                        </div>
+                        <div class="mb-3">
+                            <label for="Duration" class="form-label">Время полета</label>
+                            <input type="text" class="form-control" name="duration" value="@copter.Duration">
+                        </div>
+                        <div class="mb-3">
+                            <label for="AppManage" class="form-label">Управление через приложение</label>
+                            <input type="text" class="form-control" name="appmanage" value="@copter.AppManage">
+                        </div>
+                        <div class="mb-3">
+                            <label for="PhotoRes" class="form-label">Разрешение фото</label>
+                            <input type="text" class="form-control" name="photores" value="@copter.PhotoRes">
+                        </div>
+                    }
+                </div>
+
+                <div class="col-md-6">
+                    <label for="Image" class="form-label">Изображение</label>
+                    <div class="form-control position-relative d-flex justify-content-center align-items-center mb-3">
+                        @if (!string.IsNullOrEmpty(Model.Image))
+                        {
+                            <img src="@Model.Image"
+                                 alt="@Model.Brand @Model.Model"
+                                 id="details-img"
+                                 style="object-fit: contain; max-height: 300px;">
+                        }
+                        else
+                        {
+                            <div class="bg-light text-muted d-flex justify-content-center align-items-center"
+                                 style="height: 500px; border-radius: 0.375rem;">
+                                Изображение отсутствует
+                            </div>
+                        }
+                    </div>
+                    <div class="mb-3">
+                        <label for="Description" class="form-label">Описание</label>
+                        <textarea class="form-control" id="description" name="description" rows="10" required style="resize: none;">@Model.Description</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="actions d-flex justify-content-between">
+            <div class="d-flex gap-2 mb-3">
+                <button type="submit"
+                        id="btn-saveproduct"
+                        class="btn btn-group-sm btn-primary"
+                        onclick="saveProduct(this)">
+                    <i class="bi bi-check2-square"></i> Сохранить
+                </button>
+                <button class="btn btn-group-sm btn-danger" type="button" onclick="clearFields()">
+                    <i class="bi bi-eraser"></i> Очистить
+                </button>
+            </div>
+
+            <div class="d-flex gap-2 mb-3">
+                <button type="button"
+                        class="btn btn-group-sm btn-outline-danger"
+                        data-product-id="@Model.Id"
+                        data-action="delete"
+                        onclick="removeProduct(@Model.Id)">
+                    <i class="bi bi-trash"></i> Удалить товар
+                </button>
+            </div>
+        </div>
+
+        <a href="/Home/Details/@Model.Id" class="text-decoration-none">← В карточку товара</a>
+    </form>
+</div>

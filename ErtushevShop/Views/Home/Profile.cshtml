@@ -49,6 +49,13 @@
                         <label for="Password" class="form-label">Пароль</label>
                         <input type="password" class="form-control" name="password" value="@Model.Password">
                     </div>
+                    @if (ViewBag.Admin == true)
+                    {
+                        <div class="mb-3">
+                            <label for="Role" class="form-label">Роль</label>
+                            <input type="text" class="form-control" name="role" value="@Model.Role">
+                        </div>
+                    }
                 </div>
             </div>
         </div>

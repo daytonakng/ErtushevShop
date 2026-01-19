@@ -78,7 +78,7 @@ else
     DataTable dt = new DataTable();
     dt = database.GetData($"select * from users where username = '{username}';");
 
-    User user = new User(0, null, null, null, null, null, null, null);
+    User user = new User(0, null, null, null, null, null, null, null, null);
 
     foreach (DataRow row in dt.Rows)
     {

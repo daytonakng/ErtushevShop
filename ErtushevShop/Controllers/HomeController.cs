@@ -6,9 +6,12 @@ using Microsoft.AspNetCore.Mvc.Routing;
 using System;
 using System.Data;
 using System.Diagnostics;
+using System.IO.Pipelines;
 using System.Net;
 using System.Numerics;
+using System.Reflection;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ErtushevShop.Controllers
 {
@@ -47,14 +50,53 @@ namespace ErtushevShop.Controllers
                         image: $"/img/{row[0]}.jpg",
                         price: Convert.ToInt32(row[5])
                     );
+
+                if (!System.IO.File.Exists($"wwwroot/img/{row[0]}.jpg"))
+                {
+                    product.Image = "/img/default.png";
+                }
                 productList.Add(product);
             }
 
             return productList;
         }
 
+        private void CheckAdmin()
+        {
+            DataTable dt = new DataTable();
+            dt = database.GetData("select * from users where role = 'admin';");
+            var sessionUser = HttpContext.Session.GetString("Username");
+            if (dt.Rows.Count > 0)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    User user = new User(
+                        id: Convert.ToInt32(row[0]),
+                        login: row[1].ToString(),
+                        password: row[2].ToString(),
+                        lastname: row[3].ToString(),
+                        firstname: row[4].ToString(),
+                        middlename: row[5].ToString(),
+                        email: row[6].ToString(),
+                        phone: row[7].ToString(),
+                        role: row[8].ToString()
+                        );
+                    if (sessionUser == user.Login)
+                    {
+                        ViewBag.Admin = true;
+                        break;
+                    }
+                    else ViewBag.Admin = false;
+                }
+            }
+            else ViewBag.Admin = false;
+        }
+
         public IActionResult Index(string searchTerm = null, string selectedCategory = null, string selectedBrand = null, string sortBy = null)
         {
+            HttpContext.Session.SetString("Username", "Daytona");
+            CheckAdmin();
+
             List<Product> products = GetProductsFromDB();
 
             ViewBag.Categories = products
@@ -102,8 +144,10 @@ namespace ErtushevShop.Controllers
             };
         }
 
-        public IActionResult Details(int id)
+        public IActionResult EditProduct(int id)
         {
+            CheckAdmin();
+
             if (id / 100000 == 4)
             {
                 DataTable dtGetDataCameras = new DataTable();
@@ -124,6 +168,11 @@ namespace ErtushevShop.Controllers
                     aperture: row[8].ToString(),
                     isorange: row[9].ToString(),
                     photores: row[10].ToString());
+
+                    if (!System.IO.File.Exists($"wwwroot/img/{row[0]}.jpg"))
+                    {
+                        camera.Image = "/img/default.png";
+                    }
 
                     Product product = camera;
                     return View(product);
@@ -151,6 +200,11 @@ namespace ErtushevShop.Controllers
                     appmanage: row[9].ToString(),
                     isorange: row[10].ToString());
 
+                    if (!System.IO.File.Exists($"wwwroot/img/{row[0]}.jpg"))
+                    {
+                        actioncamera.Image = "/img/default.png";
+                    }
+
                     Product product = actioncamera;
                     return View(product);
                 }
@@ -176,6 +230,110 @@ namespace ErtushevShop.Controllers
                     duration: Convert.ToInt32(row[8]),
                     appmanage: row[9].ToString(),
                     photores: row[10].ToString());
+
+                    if (!System.IO.File.Exists($"wwwroot/img/{row[0]}.jpg"))
+                    {
+                        copter.Image = "/img/default.png";
+                    }
+
+                    Product product = copter;
+                    return View(product);
+                }
+            }
+            return View();
+        }
+
+        public IActionResult Details(int id)
+        {
+            CheckAdmin();
+
+            if (id / 100000 == 4)
+            {
+                DataTable dtGetDataCameras = new DataTable();
+                dtGetDataCameras = database.GetData($"select * from cameras where id = {id};");
+
+                foreach (DataRow row in dtGetDataCameras.Rows)
+                {
+                    Cameras camera = new Cameras(
+                    id: Convert.ToInt32(row[0]),
+                    brand: row[2].ToString(),
+                    model: row[3].ToString(),
+                    descript: row[4].ToString(),
+                    category: row[1].ToString(),
+                    image: $"/img/{row[0]}.jpg",
+                    price: Convert.ToInt32(row[5]),
+                    sensorsize: row[6].ToString(),
+                    shutterspeed: row[7].ToString(),
+                    aperture: row[8].ToString(),
+                    isorange: row[9].ToString(),
+                    photores: row[10].ToString());
+
+                    if (!System.IO.File.Exists($"wwwroot/img/{row[0]}.jpg"))
+                    {
+                        camera.Image = "/img/default.png";
+                    }
+
+                    Product product = camera;
+                    return View(product);
+                }
+            }
+
+            if (id / 100000 == 7)
+            {
+                DataTable dtGetDataActionCameras = new DataTable();
+                dtGetDataActionCameras = database.GetData($"select * from actioncameras where id = {id};");
+
+                foreach (DataRow row in dtGetDataActionCameras.Rows)
+                {
+                    ActionCameras actioncamera = new ActionCameras(
+                    id: Convert.ToInt32(row[0]),
+                    brand: row[2].ToString(),
+                    model: row[3].ToString(),
+                    descript: row[4].ToString(),
+                    category: row[1].ToString(),
+                    image: $"/img/{row[0]}.jpg",
+                    price: Convert.ToInt32(row[5]),
+                    viewangle: Convert.ToInt32(row[6]),
+                    depth: Convert.ToInt32(row[7]),
+                    fixation: row[8].ToString(),
+                    appmanage: row[9].ToString(),
+                    isorange: row[10].ToString());
+
+                    if (!System.IO.File.Exists($"wwwroot/img/{row[0]}.jpg"))
+                    {
+                        actioncamera.Image = "/img/default.png";
+                    }
+
+                    Product product = actioncamera;
+                    return View(product);
+                }
+            }
+
+            if (id / 100000 == 9)
+            {
+                DataTable dtGetDataCopters = new DataTable();
+                dtGetDataCopters = database.GetData($"select * from copters where id = {id};");
+
+                foreach (DataRow row in dtGetDataCopters.Rows)
+                {
+                    Copters copter = new Copters(
+                    id: Convert.ToInt32(row[0]),
+                    brand: row[2].ToString(),
+                    model: row[3].ToString(),
+                    descript: row[4].ToString(),
+                    category: row[1].ToString(),
+                    image: $"/img/{row[0]}.jpg",
+                    price: Convert.ToInt32(row[5]),
+                    speed: Convert.ToInt32(row[6]),
+                    height: Convert.ToInt32(row[7]),
+                    duration: Convert.ToInt32(row[8]),
+                    appmanage: row[9].ToString(),
+                    photores: row[10].ToString());
+
+                    if (!System.IO.File.Exists($"wwwroot/img/{row[0]}.jpg"))
+                    {
+                        copter.Image = "/img/default.png";
+                    }
 
                     Product product = copter;
                     return View(product);
@@ -242,7 +400,8 @@ namespace ErtushevShop.Controllers
                     firstname: row[4].ToString(),
                     middlename: row[5].ToString(),
                     email: row[6].ToString(),
-                    phone: row[7].ToString()
+                    phone: row[7].ToString(),
+                    role: row[8].ToString()
                     );
                 users.Add(user);
             }
@@ -311,7 +470,8 @@ namespace ErtushevShop.Controllers
                 firstname: null,
                 middlename: null,
                 email: null,
-                phone: null
+                phone: null,
+                role: null
                 );
 
 
@@ -418,12 +578,13 @@ namespace ErtushevShop.Controllers
 
         public IActionResult Profile()
         {
-            var username = HttpContext.Session.GetString("Username");
+            CheckAdmin();
 
+            var username = HttpContext.Session.GetString("Username");
             DataTable dt = new DataTable();
             dt = database.GetData($"select * from users where username = '{username}';");
 
-            User user = new User(0, null, null, null, null, null, null, null);
+            User user = new User(0, null, null, null, null, null, null, null, null);
 
             foreach (DataRow row in dt.Rows)
             {
@@ -435,6 +596,7 @@ namespace ErtushevShop.Controllers
                 user.MiddleName = row[5].ToString();
                 user.Email = row[6].ToString();
                 user.Phone = row[7].ToString();
+                user.Role = row[8].ToString();
             }
             return View(user);
         }
@@ -446,7 +608,7 @@ namespace ErtushevShop.Controllers
             DataTable dt = new DataTable();
             dt = database.GetData($"select * from users where username = '{username}';");
 
-            User user = new User(0, null, null, null, null, null, null, null);
+            User user = new User(0, null, null, null, null, null, null, null, null);
 
             foreach (DataRow row in dt.Rows)
             {
@@ -458,6 +620,7 @@ namespace ErtushevShop.Controllers
                 user.MiddleName = row[5].ToString();
                 user.Email = row[6].ToString();
                 user.Phone = row[7].ToString();
+                user.Role = row[8].ToString();
             }
 
             if (ModelState.IsValid)
@@ -476,6 +639,169 @@ namespace ErtushevShop.Controllers
                 HttpContext.Session.SetString("Username", user.Login);
             }
             return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult SaveProduct(int id, string brand, string model, string description, string category, int price, string sensorsize, string shutterspeed, string aperture, string isorange, string photores, int speed, int height, int depth, int duration, string fixation, int viewangle, string appmanage)
+        {
+            if (id / 100000 == 4)
+            {
+                Cameras camera = new Cameras(id, brand, model, description, category, null, price, sensorsize, shutterspeed, aperture, isorange, photores);
+                Product product = camera;
+
+                if (ModelState.IsValid)
+                {
+                    var addQuery = $"update cameras set brand = '{brand}', model = '{model}', descript = '{description}', category = '{category}', price = {price}, sensorsize = '{sensorsize}', shutterspeed = '{shutterspeed}', isorange = '{isorange}', photores = '{photores}' where id = {id}";
+                    database.GetData(addQuery);
+                }
+
+                return View(product);
+            }
+            if (id / 100000 == 7)
+            {
+                ActionCameras actioncamera = new ActionCameras(id, brand, model, description, category, null, price, viewangle, depth, fixation, appmanage, isorange);
+                Product product = actioncamera;
+
+                if (ModelState.IsValid)
+                {
+                    var addQuery = $"update actioncameras set brand = '{brand}', model = '{model}', descript = '{description}', category = '{category}', price = {price}, viewangle = {viewangle}, depthcam = {depth}, fixation = '{fixation}', appmanage = '{appmanage}', isorange = '{isorange}' where id = {id}";
+                    database.GetData(addQuery);
+                }
+
+                return View(product);
+            }
+            if (id / 100000 == 9)
+            {
+                Copters copter = new Copters(id, brand, model, description, category, null, price, speed, height, duration, appmanage, photores);
+                Product product = copter;
+
+                if (ModelState.IsValid)
+                {
+                    var addQuery = $"update copters set brand = '{brand}', model = '{model}', descript = '{description}', category = '{category}', price = {price}, speed = {speed}, height = {height}, duration = {duration}, appmanage = '{appmanage}', photores = '{photores}' where id = {id}";
+                    database.GetData(addQuery);
+                }
+
+                return View(product);
+            }
+
+            TempData["ReturnUrl"] = Request.Path + Request.QueryString;
+
+            return View();
+        }
+
+        public IActionResult RemoveProduct(int id)
+        {
+            if (id / 100000 == 4)
+            {
+                var addQuery = $"delete from cameras where id = {id}";
+                database.GetData(addQuery);
+            }
+            if (id / 100000 == 7)
+            {
+                var addQuery = $"delete from actioncameras where id = {id}";
+                database.GetData(addQuery);
+            }
+            if (id / 100000 == 9)
+            {
+                var addQuery = $"delete from copters where id = {id}";
+                database.GetData(addQuery);
+            }
+            var returnUrl = TempData["ReturnUrl"]?.ToString();
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult ManageProducts()
+        {
+            CheckAdmin();
+            List<Product> products = GetProductsFromDB();
+
+            TempData["ReturnUrl"] = Request.Path + Request.QueryString;
+
+            return View(products);
+        }
+
+        public IActionResult AddProduct()
+        {
+            CheckAdmin();
+
+            List<Product> products = GetProductsFromDB();
+            ViewBag.Categories = products
+                .Select(p => p.Category)
+                .Distinct()
+                .ToList();
+
+            return View(products);
+        }
+
+        [HttpPost]
+        public JsonResult NewProduct(int id, string brand, string model, string description, string category, int price, string sensorsize, string shutterspeed, string aperture, string isorange, string photores, int speed, int height, int depth, int duration, string fixation, int viewangle, string appmanage)
+        {
+            if (id / 100000 == 4)
+            {
+                Cameras camera = new Cameras(
+                    id: id,
+                    brand: brand,
+                    model: model,
+                    descript: description,
+                    category: category,
+                    image: "/img/default.png",
+                    price: price,
+                    sensorsize: sensorsize,
+                    shutterspeed: shutterspeed,
+                    aperture: aperture,
+                    isorange: isorange,
+                    photores: photores
+                    );
+
+                var addQuery = $"insert into cameras values ({id}, '{category}', '{brand}', '{model}', '{description}', {price}, '{sensorsize}', '{shutterspeed}', '{aperture}', '{isorange}', '{photores}');";
+                database.GetData(addQuery);
+            }
+            else if (id / 100000 == 7)
+            {
+                ActionCameras actioncamera = new ActionCameras(
+                    id: id,
+                    brand: brand,
+                    model: model,
+                    descript: description,
+                    category: category,
+                    image: "/img/default.png",
+                    price: price,
+                    viewangle: viewangle,
+                    depth: depth,
+                    fixation: fixation,
+                    appmanage: appmanage,
+                    isorange: isorange
+                    );
+
+                var addQuery = $"insert into actioncameras values ({id}, '{category}', '{brand}', '{model}', '{description}', {price}, '{viewangle}', '{depth}', '{fixation}', '{appmanage}', '{isorange}');";
+                database.GetData(addQuery);
+            }
+            else if (id / 100000 == 9)
+            {
+                Copters copter = new Copters(
+                    id: id,
+                    brand: brand,
+                    model: model,
+                    descript: description,
+                    category: category,
+                    image: "/img/default.png",
+                    price: price,
+                    speed: speed,
+                    height: height,
+                    duration: duration,
+                    appmanage: appmanage,
+                    photores: photores
+                    );
+
+                var addQuery = $"insert into copters values ({id}, '{category}', '{brand}', '{model}', '{description}', {price}, {speed}, {height}, {duration}, '{appmanage}', '{photores}');";
+                database.GetData(addQuery);
+            }
+
+            return Json(new { success = true, message = "Товар был успешно добавлен!" });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

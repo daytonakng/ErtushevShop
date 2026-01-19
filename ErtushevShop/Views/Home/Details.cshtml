@@ -43,21 +43,34 @@
             }
 
             <div class="d-flex gap-2 mb-4">
-                <form class="add-to-cart-form" asp-action="AddToCart" method="post" onsubmit="showAddToCartToast()">
-                    <input type="hidden" name="id" value="@Model.Id" />
-                    <button type="submit"
-                        class="btn btn-lg btn-outline-success"
-                            onclick="handleAddToCart(this)">
-                        <i class="bi bi-basket"></i> В корзину
+                @if (ViewBag.Admin == true)
+                {
+                    <button type="button"
+                            class="btn btn-lg btn-outline-primary"
+                            data-product-id="@Model.Id"
+                            data-action="edit"
+                            onclick="editProduct(@Model.Id)">
+                        <i class="bi bi-pencil"></i> Редактировать
                     </button>
-                </form>
-@*                 <button type="button" 
-                    class="btn btn-lg btn-outline-danger"
-                    data-product-id="@Model.Id"
-                    data-action="favorite"
-                    onclick="toggleFavorite(this)">
-                    <i class="bi bi-heart"></i> В избранное
-                </button> *@
+                    <button type="button"
+                            class="btn btn-lg btn-outline-danger"
+                            data-product-id="@Model.Id"
+                            data-action="delete"
+                            onclick="removeProduct(@Model.Id)">
+                        <i class="bi bi-trash"></i> Удалить товар
+                    </button>
+                }
+                else
+                {
+                    <form class="add-to-cart-form" asp-action="AddToCart" method="post" onsubmit="showAddToCartToast()">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        <button type="submit"
+                                class="btn btn-lg btn-outline-success"
+                                onclick="handleAddToCart(this)">
+                            <i class="bi bi-basket"></i> В корзину
+                        </button>
+                    </form>
+                }
             </div>
 
             <a href="/" class="text-decoration-none">← Вернуться к каталогу</a>
@@ -107,7 +120,7 @@
                     {
                         <tr><th>Скорость</th><td>@copter.Speed</td></tr>
                         <tr><th>Максимальная высота</th><td>@copter.Height</td></tr>
-                        <tr><th>Время полёта</th><td>@copter.Duration</td></tr>
+                        <tr><th>Время полета</th><td>@copter.Duration</td></tr>
                         <tr><th>Управление через приложение</th><td>@copter.AppManage</td></tr>
                         <tr><th>Разрешение фото</th><td>@copter.PhotoRes</td></tr>
                     }

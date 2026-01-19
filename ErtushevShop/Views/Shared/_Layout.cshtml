@@ -23,35 +23,64 @@
             </div>
 
             <div class="header-actions d-flex align-items-center gap-2">
-                <div class="position-relative">
-                    <a href="/Home/Cart" class="text-dark text-decoration-none position-relative" title="Корзина">
-                        <i class="bi bi-basket fs-4"></i>
-                    </a>
-                </div>
-
-@*                 <div class="position-relative">
-                     <a href="/Home/Favorite" class="text-dark text-decoration-none position-relative" title="Избранное">
-                        <i class="bi bi-heart fs-4"></i>
-                    </a>
-                </div> *@
-
                 @{
                     var username = Context.Session.GetString("Username");
                 }
                 @if (!string.IsNullOrEmpty(username))
                 {
-                    <div class="position-relative">
-                        <button class="btn-profile" type="button" onclick="window.location.href='/Home/Profile'">@username</button>
-                    </div>
+                    if (ViewBag.Admin == true)
+                    {
+                        <div class="position-relative">
+                            <a href="/Home/ManageProducts" class="text-muted text-decoration-none fs-6" title="Управление товарами">
+                                <i class="bi bi-shop fs-4"></i>
+                            </a>
+                        </div>
+                        <div class="position-relative">
+                            <a href="/Home/ManageProducts" class="text-muted text-decoration-none fs-6" title="Управление пользователями">
+                                <i class="bi bi-person-gear fs-4"></i>
+                            </a>
+                        </div>
+                        <div class="position-relative">
+                            <button class="btn-admin-profile" type="button" onclick="window.location.href='/Home/Profile'">@username</button>
+                        </div>
 
-                    <div class="position-relative">
-                        <a href="/Home/Logout" class="text-muted text-decoration-none fs-6" title="Выйти">
-                            <i class="bi bi-box-arrow-right fs-4"></i>
-                        </a>
-                    </div>
+                        <div class="position-relative">
+                            <a href="/Home/Logout" class="text-muted text-decoration-none fs-6" title="Выйти">
+                                <i class="bi bi-box-arrow-right fs-4"></i>
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="position-relative">
+                            <a href="/Home/Cart" class="text-dark text-decoration-none position-relative" title="Корзина">
+                                <i class="bi bi-basket fs-4"></i>
+                            </a>
+                        </div>
+                        <div class="position-relative">
+                            <button class="btn-profile" type="button" onclick="window.location.href='/Home/Profile'">@username</button>
+                        </div>
+
+                        <div class="position-relative">
+                            <a href="/Home/Logout" class="text-muted text-decoration-none fs-6" title="Выйти">
+                                <i class="bi bi-box-arrow-right fs-4"></i>
+                            </a>
+                        </div>
+                    }
                 }
                 else
                 {
+                    <div class="position-relative">
+                        <a href="/Home/Cart" class="text-dark text-decoration-none position-relative" title="Корзина">
+                            <i class="bi bi-basket fs-4"></i>
+                        </a>
+                    </div>
+
+@*                      <div class="position-relative">
+                        <a href="/Home/Favorite" class="text-dark text-decoration-none position-relative" title="Избранное">
+                            <i class="bi bi-heart fs-4"></i>
+                        </a>
+                    </div> *@
                     <div class="position-relative">
                         <a href="/Home/Login" class="text-dark text-decoration-none" title="Вход/Регистрация">
                             <i class="bi bi-person-circle fs-4"></i>
@@ -87,6 +116,41 @@
             </div>
             <div class="toast-body">
                 Данные пользователя успешно изменены
+            </div>
+        </div>
+    </div>
+    <div aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="saveProductToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto">Данные изменены!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Данные товара успешно изменены
+            </div>
+        </div>
+    </div>
+
+    <div aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="removeProductToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto">Товар удален!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Товар был успешно удален
+            </div>
+        </div>
+    </div>
+
+    <div aria-live="polite" aria-atomic="true" class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="wrongProductToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header bg-success text-white">
+                <strong class="me-auto">Ошибка добавления товара!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Проверьте правильность ввода данных
             </div>
         </div>
     </div>

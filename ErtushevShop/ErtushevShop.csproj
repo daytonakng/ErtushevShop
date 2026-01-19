@@ -9,6 +9,7 @@
   <ItemGroup>
     <Content Remove="wwwroot\img\actionlens-logo.png" />
     <Content Remove="wwwroot\img\background.jpg" />
+    <Content Remove="wwwroot\img\default-img.png" />
     <Content Remove="wwwroot\img\gopro.jpg" />
     <Content Remove="wwwroot\img\i.webp" />
     <Content Remove="wwwroot\img\logo.png" />
@@ -27,6 +28,7 @@
     <Resource Include="Controllers\img\nikon-d7500.jpg" />
     <Resource Include="wwwroot\img\actionlens-logo.png" />
     <Resource Include="wwwroot\img\background.jpg" />
+    <Resource Include="wwwroot\img\default-img.png" />
     <Resource Include="wwwroot\img\gopro.jpg" />
     <Resource Include="wwwroot\img\i.webp" />
     <Resource Include="wwwroot\img\logo.png" />

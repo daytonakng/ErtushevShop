@@ -82,7 +82,7 @@
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
                 @foreach (var product in Model)
                 {
-                    <div class="col">
+                    <div class="col col-card">
                         <div class="card h-100 shadow-sm">
                             <div class="d-flex justify-content-center align-items-center" style="height: 200px; padding-top: 1rem">
                                 @if (!string.IsNullOrEmpty(product.Image))
@@ -110,14 +110,26 @@
                                         @string.Format("{0:C}", product.Price)
                                     </span>
                                     <div class="d-flex gap-2">
-                                        <form class="add-to-cart-form" asp-action="AddToCart" method="post" onsubmit="showAddToCartToast()">
-                                            <input type="hidden" name="id" value="@product.Id" />
-                                            <button type="submit"
-                                                class="btn btn-sm btn-outline-success"
-                                                    onclick="handleAddToCart(this)">
-                                                <i class="bi bi-basket"></i> Купить
-                                            </button>
-                                        </form>
+                                        @if (ViewBag.Admin == true)
+                                        {
+                                            <a href="/Home/EditProduct/@product.Id" class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a href="/Home/RemoveProduct/@product.Id" class="btn btn-sm btn-outline-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <form class="add-to-cart-form" asp-action="AddToCart" method="post" onsubmit="showAddToCartToast()">
+                                                <input type="hidden" name="id" value="@product.Id" />
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-outline-success"
+                                                        onclick="handleAddToCart(this)">
+                                                    <i class="bi bi-basket"></i> Купить
+                                                </button>
+                                            </form>
+                                        }
                                     </div>
                                 </div>
                             </div>
