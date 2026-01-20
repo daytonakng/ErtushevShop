@@ -94,7 +94,7 @@ namespace ErtushevShop.Controllers
 
         public IActionResult Index(string searchTerm = null, string selectedCategory = null, string selectedBrand = null, string sortBy = null)
         {
-            HttpContext.Session.SetString("Username", "Daytona");
+            //HttpContext.Session.SetString("Username", "Daytona");
             CheckAdmin();
 
             List<Product> products = GetProductsFromDB();
@@ -576,28 +576,31 @@ namespace ErtushevShop.Controllers
             return View(order);
         }
 
+        public IActionResult EditUser(int id)
+        {
+            CheckAdmin();
+
+            List<User> users = GetUsersFromDb();
+
+            ViewBag.Roles = users
+                .Select(p => p.Role)
+                .Distinct()
+                .ToList();
+
+            User user = users.Where(u => u.Id == id).FirstOrDefault();
+
+            return View(user);
+        }
+
         public IActionResult Profile()
         {
             CheckAdmin();
 
             var username = HttpContext.Session.GetString("Username");
-            DataTable dt = new DataTable();
-            dt = database.GetData($"select * from users where username = '{username}';");
 
-            User user = new User(0, null, null, null, null, null, null, null, null);
+            List<User> users = GetUsersFromDb();
+            User user = users.Where(u => u.Login ==  username).FirstOrDefault();
 
-            foreach (DataRow row in dt.Rows)
-            {
-                user.Id = Convert.ToInt32(row[0]);
-                user.Login = row[1].ToString();
-                user.Password = row[2].ToString();
-                user.LastName = row[3].ToString();
-                user.FirstName = row[4].ToString();
-                user.MiddleName = row[5].ToString();
-                user.Email = row[6].ToString();
-                user.Phone = row[7].ToString();
-                user.Role = row[8].ToString();
-            }
             return View(user);
         }
 
@@ -605,23 +608,9 @@ namespace ErtushevShop.Controllers
         public IActionResult EditProfile(string lastName, string firstName, string middleName, string phone, string email, string login, string password)
         {
             var username = HttpContext.Session.GetString("Username");
-            DataTable dt = new DataTable();
-            dt = database.GetData($"select * from users where username = '{username}';");
 
-            User user = new User(0, null, null, null, null, null, null, null, null);
-
-            foreach (DataRow row in dt.Rows)
-            {
-                user.Id = Convert.ToInt32(row[0]);
-                user.Login = row[1].ToString();
-                user.Password = row[2].ToString();
-                user.LastName = row[3].ToString();
-                user.FirstName = row[4].ToString();
-                user.MiddleName = row[5].ToString();
-                user.Email = row[6].ToString();
-                user.Phone = row[7].ToString();
-                user.Role = row[8].ToString();
-            }
+            List<User> users = GetUsersFromDb();
+            User user = users.Where(u => u.Login == username).FirstOrDefault();
 
             if (ModelState.IsValid)
             {
@@ -637,6 +626,28 @@ namespace ErtushevShop.Controllers
                 database.GetData(addQuery);
 
                 HttpContext.Session.SetString("Username", user.Login);
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        public IActionResult SaveUser(int id, string lastName, string firstName, string middleName, string phone, string email, string login, string role)
+        {
+            List<User> users = GetUsersFromDb();
+            User user = users.Where(u => u.Id == id).FirstOrDefault();
+
+            if (ModelState.IsValid)
+            {
+                user.LastName = lastName;
+                user.FirstName = firstName;
+                user.MiddleName = middleName;
+                user.Phone = phone;
+                user.Email = email;
+                user.Login = login;
+                user.Role = role;
+
+                var addQuery = $"update users set lastname = '{user.LastName}', firstname = '{user.FirstName}', middlename = '{user.MiddleName}', phone = '{user.Phone}', email = '{user.Email}', username = '{user.Login}', role = '{user.Role}' where id = {user.Id}";
+                database.GetData(addQuery);
             }
             return View(user);
         }
@@ -711,7 +722,20 @@ namespace ErtushevShop.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ManageProducts", "Home");
+        }
+
+        public IActionResult RemoveUser(int id)
+        {
+            var delQuery = $"delete from users where id = {id}";
+            database.GetData(delQuery);
+
+            var returnUrl = TempData["ReturnUrl"]?.ToString();
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("ManageUsers", "Home");
         }
 
         public IActionResult ManageProducts()
@@ -721,7 +745,21 @@ namespace ErtushevShop.Controllers
 
             TempData["ReturnUrl"] = Request.Path + Request.QueryString;
 
+            products = products.OrderBy(p => p.Id).ToList();
+
             return View(products);
+        }
+
+        public IActionResult ManageUsers()
+        {
+            CheckAdmin();
+            List<User> users = GetUsersFromDb();
+
+            TempData["ReturnUrl"] = Request.Path + Request.QueryString;
+
+            users = users.OrderBy(u => u.Id).ToList();
+
+            return View(users);
         }
 
         public IActionResult AddProduct()

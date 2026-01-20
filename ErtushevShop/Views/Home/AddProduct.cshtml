@@ -13,7 +13,8 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="Id" class="form-label">Артикул</label>
-                        <input id="newid" type="text" class="form-control" name="id" placeholder="">
+                        <input type="text" id="newid-disabled" class="form-control" value="">
+                        <input type="hidden" id="newid" name="id" value="" />
                     </div>
 
                     <div class="mb-3">
@@ -52,10 +53,10 @@
                     <label for="Image" class="form-label">Изображение</label>
                     <div class="form-control position-relative d-flex justify-content-center align-items-center mb-3">
                         <img src="/img/default.png"
-                                alt="Новое изображение"
-                                id="details-img"
-                                style="object-fit: contain; max-height: 300px;">
-@*                         else
+                             alt="Новое изображение"
+                             id="details-img"
+                             style="object-fit: contain; max-height: 300px;">
+                        @*                         else
                         {
                             <div class="bg-light text-muted d-flex justify-content-center align-items-center"
                                  style="height: 500px; border-radius: 0.375rem;">

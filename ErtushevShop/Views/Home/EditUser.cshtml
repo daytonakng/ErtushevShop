@@ -1,0 +1,102 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = $"Пользователь №{Model.Id}";
+}
+
+<div class="card mb-5">
+    <div class="card-header bg-primary text-white">
+        <h5 class="card-title mb-0">Пользователь @Model.Login</h5>
+    </div>
+
+    <form method="post" class="p-3" onsubmit="showEditProfile()">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="LastName" class="form-label">Фамилия</label>
+                        <input type="text" class="form-control" name="lastName" placeholder="Иванов" value="@Model.LastName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="FirstName" class="form-label">Имя</label>
+                        <input type="text" class="form-control" name="firstName" placeholder="Иван" value="@Model.FirstName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="MiddleName" class="form-label">Отчество</label>
+                        <input type="text" class="form-control" name="middleName" placeholder="Иванович" value="@Model.MiddleName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Phone" class="form-label">Телефон</label>
+                        <input type="tel" class="form-control" name="phone" placeholder="79998887766" value="@Model.Phone">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email</label>
+                        <input type="email" class="form-control" name="email" placeholder="ivanov@mail.ru" value="@Model.Email">
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="actions d-flex justify-content-between">
+                            <div class="d-flex gap-2 mb-3">
+                                <button type="submit"
+                                        id="btn-saveprofile"
+                                        class="btn btn-primary"
+                                        onclick="saveUser(this)">
+                                    <i class="bi bi-check2-square"></i> Сохранить
+                                </button>
+                                <button class="btn btn-group-sm btn-danger" type="button" onclick="clearFields()">
+                                    <i class="bi bi-eraser"></i> Очистить
+                                </button>
+                            </div>
+
+                            <div class="d-flex gap-2 mb-3">
+                                <button type="button"
+                                        class="btn btn-group-sm btn-outline-danger"
+                                        data-product-id="@Model.Id"
+                                        data-action="delete"
+                                        onclick="removeUser(@Model.Id)">
+                                    <i class="bi bi-trash"></i> Удалить пользователя
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="/Home/ManageUsers/" class="text-decoration-none">← Вернуться к списку пользователей</a>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="Id" class="form-label">ID</label>
+                        <input type="text" class="form-control" value="@Model.Id" disabled>
+                        <input type="hidden" name="id" value="@Model.Id" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Login" class="form-label">Логин</label>
+                        <input type="text" class="form-control" name="login" value="@Model.Login">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Password" class="form-label">Пароль</label>
+                        <input type="password" class="form-control" name="password" value="@Model.Password" disabled>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Role" class="form-label">Роль</label>
+                        <select id="role" class="form-select" name="role">
+                            <option value="">Выберите роль</option>
+                            @foreach (var role in ViewBag.Roles)
+                            {
+                                if (role == Model.Role) { <option value="@role" selected>@role</option> }
+                                else { <option value="@role">@role</option> }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

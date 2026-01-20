@@ -1,11 +1,11 @@
 ﻿@model Product
 
 @{
-    ViewData["Title"] = $"Редактирование товара №{Model.Id}";
+    ViewData["Title"] = $"Товар №{Model.Id}";
 }
 <div class="card mb-5">
     <div class="card-header bg-primary text-white">
-        <h5 class="card-title mb-0">Редактирование товара</h5>
+        <h5 class="card-title mb-0">Товар №@Model.Id</h5>
     </div>
 
     <form method="post" class="p-3" onsubmit="showEditProfile()">
@@ -102,6 +102,33 @@
                             <input type="text" class="form-control" name="photores" value="@copter.PhotoRes">
                         </div>
                     }
+                    <div class="mb-3">
+                        <div class="actions d-flex justify-content-between">
+                            <div class="d-flex gap-2 mb-3">
+                                <button type="submit"
+                                        id="btn-saveproduct"
+                                        class="btn btn-group-sm btn-primary"
+                                        onclick="saveProduct(this)">
+                                    <i class="bi bi-check2-square"></i> Сохранить
+                                </button>
+                                <button class="btn btn-group-sm btn-danger" type="button" onclick="clearFields()">
+                                    <i class="bi bi-eraser"></i> Очистить
+                                </button>
+                            </div>
+
+                            <div class="d-flex gap-2 mb-3">
+                                <button type="button"
+                                        class="btn btn-group-sm btn-outline-danger"
+                                        data-product-id="@Model.Id"
+                                        data-action="delete"
+                                        onclick="removeProduct(@Model.Id)">
+                                    <i class="bi bi-trash"></i> Удалить товар
+                                </button>
+                            </div>
+                        </div>
+
+                        <a href="/Home/Details/@Model.Id" class="text-decoration-none">← В карточку товара</a>
+                    </div>
                 </div>
 
                 <div class="col-md-6">
@@ -129,31 +156,5 @@
                 </div>
             </div>
         </div>
-
-        <div class="actions d-flex justify-content-between">
-            <div class="d-flex gap-2 mb-3">
-                <button type="submit"
-                        id="btn-saveproduct"
-                        class="btn btn-group-sm btn-primary"
-                        onclick="saveProduct(this)">
-                    <i class="bi bi-check2-square"></i> Сохранить
-                </button>
-                <button class="btn btn-group-sm btn-danger" type="button" onclick="clearFields()">
-                    <i class="bi bi-eraser"></i> Очистить
-                </button>
-            </div>
-
-            <div class="d-flex gap-2 mb-3">
-                <button type="button"
-                        class="btn btn-group-sm btn-outline-danger"
-                        data-product-id="@Model.Id"
-                        data-action="delete"
-                        onclick="removeProduct(@Model.Id)">
-                    <i class="bi bi-trash"></i> Удалить товар
-                </button>
-            </div>
-        </div>
-
-        <a href="/Home/Details/@Model.Id" class="text-decoration-none">← В карточку товара</a>
     </form>
 </div>

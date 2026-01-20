@@ -228,6 +228,29 @@ function editProfile(button) {
         });
 };
 
+function saveUser(button) {
+    const form = button.closest('form');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+    }, { once: true });
+
+    const data = new FormData(form);
+
+    fetch('/Home/SaveUser', {
+        method: 'POST',
+        body: data
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('Данные пользователя успешно изменены!');
+                showEditProfile();
+            } else {
+                console.error('Ошибка изменения данных пользователя!');
+            }
+        });
+};
+
 function saveProduct(button) {
     const form = button.closest('form');
 
@@ -255,9 +278,13 @@ function removeProduct(id) {
     window.location.href = '/Home/RemoveProduct/' + id;
 };
 
+function removeUser(id) {
+    window.location.href = '/Home/RemoveUser/' + id;
+};
+
 function clearFields() {
     document.querySelectorAll('input[type="text"], textarea')
-        .forEach(input => input.value = '');
+        .forEach(input => { if (!input.hasAttribute('disabled')) input.value = '' } );
 };
 
 
@@ -265,9 +292,23 @@ function updateContent() {
     const select = document.getElementById('newcategory');
     const variableFields = document.getElementById('variableFields');
     const selectedValue = select.value;
+    const newiddisabled = document.getElementById('newid-disabled');
+    const newid = document.getElementById('newid');
+
+    let min = 0;
+    let max = 0;
+    let randomId = 0;
 
     switch (selectedValue) {
         case "Фотоаппарат":
+            min = 400000;
+            max = 499999;
+            randomId = Math.floor(Math.random() * (max - min + 1)) + min;
+
+            newid.setAttribute('value', `${randomId}`);
+            newiddisabled.setAttribute('value', `${randomId}`);
+            newiddisabled.setAttribute('disabled', 'disabled');
+
             variableFields.innerHTML = `
                <div class="mb-3">
                     <label for="SensorSize" class="form-label">Размер сенсора</label>
@@ -292,6 +333,14 @@ function updateContent() {
             `;
             break;
         case "Экшн-камера":
+            min = 700000;
+            max = 799999;
+            randomId = Math.floor(Math.random() * (max - min + 1)) + min;
+
+            newid.setAttribute('value', `${randomId}`);
+            newiddisabled.setAttribute('value', `${randomId}`);
+            newiddisabled.setAttribute('disabled', 'disabled');
+
             variableFields.innerHTML = `
                 <div class="mb-3">
                     <label for="ViewAngle" class="form-label">Угол обзора</label>
@@ -316,6 +365,14 @@ function updateContent() {
             `;
             break;
         case "Квадрокоптер":
+            min = 900000;
+            max = 999999;
+            randomId = Math.floor(Math.random() * (max - min + 1)) + min;
+
+            newid.setAttribute('value', `${randomId}`);
+            newiddisabled.setAttribute('value', `${randomId}`);
+            newiddisabled.setAttribute('disabled', 'disabled');
+
             variableFields.innerHTML = `
                 <div class="mb-3">
                     <label for="Speed" class="form-label">Скорость</label>
